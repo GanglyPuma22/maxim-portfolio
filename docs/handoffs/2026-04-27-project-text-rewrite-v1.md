@@ -1,118 +1,84 @@
-# Project text rewrite v1 handoff
+# Project text rewrite v1
 
-- Repo: `/home/mmounier/.openclaw/workspace/apps/maxim-portfolio`
-- Branch: `project-text-rewrite-v1`
-- PR: https://github.com/GanglyPuma22/maxim-portfolio/pull/3
-- Base: `main`
-- Commit: `bfe3a33` (`Rewrite portfolio project detail copy`)
+Date: 2026-04-27
+Branch: `project-text-rewrite-v1`
+
+## Scope
+- Rewrite **project detail page** copy only.
+- Leave homepage / main-page project card copy alone.
+- Make the voice sound more like Maxim: more specific, less portfolio-builder / AI-ish.
+- Ground changes in existing repo docs, READMEs, media, and prior review notes.
 
 ## What changed
+### Rendering / structure
+- Added `detailSummary` so project pages can have a stronger first paragraph **without changing homepage summaries**.
+- Renamed two detail-page panel headers for cleaner framing:
+  - `How it was shaped` → `Key decisions`
+  - `Why it matters here` → `Results`
 
-This pass rewrote project-detail copy so the pages read more like Maxim describing the work himself and less like a portfolio trying to justify itself.
-
-Two implementation choices kept the scope tight:
-
-1. Added `detailSummary` fields in `data/projects.js` so project-detail top summaries could change without rewriting homepage card text.
-2. Updated `renderProjectDetail` in `app.js` to prefer `project.detailSummary || project.summary`, and renamed the detail-page meta labels from `How it was shaped` / `Why it matters here` to `Key decisions` / `Results`.
-
-## Projects materially rewritten
-
-Priority / strongest pass:
+### Projects rewritten
 - NASA Ames - Simulation Engineering
-- Voice Bridge
-- AHTO
 - Tank Control System
-- Small SADA
-- Penn Jet Propulsion Club
-
-Additional meaningful rewrites:
-- Cuarenta
-- Transcription Server
+- Voice Bridge
 - OpenClaw Skill Viewer
-- Graduate Robotics
+- Transcription Server
+- Cuarenta
+- AHTO
+- Penn Jet Propulsion Club
+- Small SADA
+- Graduate Robotics — Block Stacking
 - Semi-Autonomous Car
 - MatlabMario
-- Heat Engine
-- Carousel
-- VAWT
-- Water Tower
 
-## Major themes changed
+### Rewrite pattern
+Across those project pages, the pass mainly tightened:
+- opening detail summaries
+- challenge / role framing
+- key decisions / approach bullets
+- results / outcomes bullets
+- one or more detail sections where the old copy still sounded too abstract or meta
 
-- Removed portfolio-meta framing like "why this belongs here" and similar self-justification language from detail pages.
-- Cut or reduced OpenClaw-ish/system phrasing on project pages in favor of concrete engineering tradeoffs, constraints, and outcomes.
-- Shifted voice toward first-person ownership where the sourcing supported it.
-- Kept uncertain claims soft and factual instead of trying to make every project sound bigger than it was.
-- Preserved homepage/main-page copy on purpose; detail-page copy was the target for this pass.
+## Notable wins
+- **Voice Bridge** now reads much more like a real product/architecture story and less like agent-tooling marketing copy.
+- **Tank Control System** feels more lived-in and grounded in actual system boundaries.
+- **NASA** is clearer about the public-safe slice of the work.
+- **Cuarenta** now sounds like a project Maxim actually built for friends, not a generic frontend case study.
+- **Archive projects** (Penn Jet, SADA, robotics, mechatronics car, MatlabMario) now feel more human and memory-based instead of résumé-expanded.
 
-## Project-by-project notes / outstanding uncertainties
+## Verification
+- `npm test`
+- Browser spot-check: homepage still shows existing main-page summary copy
+- Browser spot-check: `/projects/voice-bridge` shows the new detail-page-specific summary and rewritten sections
 
-### NASA Ames - Simulation Engineering
-- Confidence is high on the public-facing scope.
-- Still intentionally conservative because the role sits close to active research work.
-- Homepage summary still contains older wording because homepage copy was left untouched by design.
+## Remaining factual nits worth Maxim checking
+These are not blockers for review, but they are the places where a final factual polish pass would help most.
 
-### Voice Bridge
-- Strong source grounding from README + architecture handoff.
-- Product wording is clearer now, but release state and naming could still shift as the private build evolves.
-- Homepage blurb still contains the older "truth boundaries" phrasing because homepage copy was not part of this pass.
+- **NASA Ames - Simulation Engineering**
+  - Is the Boeing autonomous taxi wording exactly how Maxim wants it framed publicly?
+  - Is the Rust up-sampler mention precise enough for public wording?
 
-### AHTO
-- The public/private boundary is clearer now.
-- Still some unavoidable abstraction because the repo is a public slice of a broader internal testing approach.
-- Homepage summary still uses older packaging language because the main-page copy was intentionally not rewritten.
+- **Tank Control System**
+  - Keep the explicit Yasha mention, or make it slightly more neutral?
 
-### Tank Control System
-- Strong factual grounding from repo docs and V2 architecture spec.
-- The page is more direct now, but some future-facing V2 wording may still want another pass once implementation settles further.
+- **Voice Bridge**
+  - Is naming OpenClaw directly on the project page the desired public framing?
+  - Is “private build in progress” the best status label, or should it read closer to unreleased / internal / active private development?
 
-### Small SADA
-- Grounding is good from the existing portfolio/source material.
-- Still somewhat constrained by how much detailed public documentation exists compared with the flagship software projects.
+- **OpenClaw Skill Viewer**
+  - If there is a favorite public release / landing page link, the page could later be tightened around that proof.
 
-### Penn Jet Propulsion Club
-- Rewritten around controls fixtures, sensing, manufacturing, and the working engine outcome.
-- Exact phrasing around team safety justification was softened because the source support is more contextual than fully documented.
+- **Transcription Server**
+  - The current wording is strong, but if Maxim has a preferred short public name for the project, that would help consistency.
 
-### Cuarenta
-- The project story is much more human now.
-- Public-release blocker language is still necessarily about trust/server authority because that is the real open issue.
-- Homepage blurb still contains the older "range piece" phrasing because homepage copy was intentionally left alone.
+- **Cuarenta**
+  - The trust-model caveat is good; could still be tuned depending on how cautious Maxim wants the public posture to be.
 
-### Transcription Server
-- Grounded in the public README and surrounding portfolio context.
-- Could benefit from another pass later if the repo grows more implementation detail or a stronger public demo.
+- **AHTO**
+  - If Maxim wants the acronym expanded on-page, that can be done in a later pass.
 
-### OpenClaw Skill Viewer
-- Clearer now, but still limited by how much public-facing narrative the source repo currently carries.
+- **Penn Jet / Small SADA / Robotics / Semi-Autonomous Car / MatlabMario**
+  - These are now much more readable, but the next quality bump would come from any extra exact dates, course names, subsystem names, or team-role specifics Maxim wants to preserve.
 
-### Graduate Robotics
-- Better grounded in the actual sim-to-hardware arc and block-stacking deliverable.
-- Still concise because the available source material is thinner than a full project report.
-
-### Semi-Autonomous Car
-- The analog front-end and demo constraints come through better now.
-- Still somewhat summary-level because the public evidence packet is mostly video/report level.
-
-### MatlabMario
-- Intentionally kept light and personal.
-- No major factual uncertainty; this one mainly benefited from sounding less synthetic.
-
-### Heat Engine / Carousel / VAWT / Water Tower
-- Archive pages were tightened and made less generic.
-- These remain brief because the goal was cleanup, not a full historical reconstruction.
-
-## Verification notes
-
-- `node --check app.js`
-- `node --check data/projects.js`
-- `npm test` → pass (8/8)
-- Started the local dev server and verified project routes returned successfully.
-- Browser render spot checks confirmed the updated detail-page summaries and the renamed `Key decisions` / `Results` sections were showing on the rendered project pages.
-
-## Scope notes
-
-- Local `main` was not used as the working base; the branch was created from the latest `origin/main`.
-- Work was completed on `project-text-rewrite-v1` and pushed separately.
-- `main` was not pushed to.
-- Remaining banned/meta phrases that still exist are confined to homepage/main-page fields that were intentionally left untouched to respect scope.
+## Recommended next step
+- Open PR into `main` for Maxim review.
+- After review comments, do one last factual-tightening pass on any projects where Maxim wants sharper wording or safer public boundaries.
