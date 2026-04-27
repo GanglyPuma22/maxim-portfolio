@@ -2,9 +2,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [projects, styles] = await Promise.all([
+const [projects, styles, indexHtml, server] = await Promise.all([
   readFile(new URL('../data/projects.js', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
+  readFile(new URL('../index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../server.mjs', import.meta.url), 'utf8'),
 ]);
 
 test('uses the updated Future Flight Central caption everywhere', () => {
@@ -45,4 +47,18 @@ test('mobile flagship slide has enough vertical room for title text', () => {
   assert.equal(styles.includes('.flagship-slides {\n    aspect-ratio: 3 / 5;'), true);
   assert.equal(styles.includes('.flagship-slide h2 {\n    font-size: clamp(2.1rem, 12vw, 3.2rem);'), true);
   assert.equal(styles.includes('.flagship-slide-facts span {\n    max-width: 100%;\n    white-space: normal;'), true);
+});
+
+
+test('GitHub Pages build uses the repo base path for root assets', () => {
+  assert.match(indexHtml, /href="\/maxim-portfolio\/styles\.css"/);
+  assert.match(indexHtml, /src="\/maxim-portfolio\/app\.js"/);
+  assert.match(indexHtml, /href="\/maxim-portfolio\/"/);
+});
+
+
+test('local dev server strips the repo base path before resolving files', () => {
+  assert.match(server, /const BASE_PATH = '\/maxim-portfolio';/);
+  assert.match(server, /normalizedPath === BASE_PATH/);
+  assert.match(server, /normalizedPath\.startsWith\(`\$\{BASE_PATH\}\/`\)/);
 });

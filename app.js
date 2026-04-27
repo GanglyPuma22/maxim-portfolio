@@ -11,6 +11,22 @@ import {
 } from './data/projects.js';
 
 const app = document.querySelector('#app');
+const BASE_PATH = '/maxim-portfolio';
+
+const withBasePath = (path = '/') => {
+  if (/^(https?:|mailto:|tel:|#)/.test(path)) return path;
+  const normalized = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_PATH}${normalized === '/' ? '/' : normalized}`;
+};
+
+const stripBasePath = (pathname) => {
+  if (pathname === BASE_PATH) return '/';
+  if (pathname.startsWith(`${BASE_PATH}/`)) return pathname.slice(BASE_PATH.length) || '/';
+  return pathname;
+};
+
+const routeHref = (path = '/', hash = '') => `${withBasePath(path)}${hash}`;
+const assetUrl = (url = '') => (/^(https?:|data:|blob:)/.test(url) ? url : withBasePath(url));
 
 const homeSlideshowState = {
   index: 0,
@@ -33,7 +49,8 @@ const escapeHtml = (value) =>
     .replaceAll("'", '&#39;');
 
 const routeFromLocation = () => {
-  const segments = window.location.pathname.split('/').filter(Boolean);
+  const strippedPath = stripBasePath(window.location.pathname);
+  const segments = strippedPath.split('/').filter(Boolean);
 
   if (segments[0] === 'projects' && segments[1]) {
     return { type: 'project', slug: segments[1] };
@@ -92,7 +109,7 @@ const renderMedia = (projectOrMedia, variant = 'wide', options = {}) => {
     const preload = options.preload || media.preload || 'none';
     return `
       <figure class="project-media project-media-${variant} project-media-video">
-        <video src="${escapeHtml(media.src)}" controls preload="${escapeHtml(preload)}" playsinline${media.poster ? ` poster="${escapeHtml(media.poster)}"` : ''}></video>
+        <video src="${escapeHtml(assetUrl(media.src))}" controls preload="${escapeHtml(preload)}" playsinline${media.poster ? ` poster="${escapeHtml(assetUrl(media.poster))}"` : ''}></video>
         ${variant === 'cover' ? '' : `<figcaption>${escapeHtml(media.caption || '')}</figcaption>`}
       </figure>
     `;
@@ -102,7 +119,7 @@ const renderMedia = (projectOrMedia, variant = 'wide', options = {}) => {
     return `
       <figure class="project-media project-media-${variant} project-media-embed">
         <iframe
-          src="${escapeHtml(media.src)}"
+          src="${escapeHtml(assetUrl(media.src))}"
           title="${escapeHtml(media.alt || title)}"
           loading="${escapeHtml(loading)}"
           referrerpolicy="strict-origin-when-cross-origin"
@@ -116,12 +133,12 @@ const renderMedia = (projectOrMedia, variant = 'wide', options = {}) => {
 
   const expandable = variant !== 'cover' && variant !== 'tile' && variant !== 'thumb';
   const dataAttrs = expandable
-    ? ` data-expandable="true" data-full-src="${escapeHtml(media.src)}" data-caption="${escapeHtml(media.caption || media.alt || '')}" data-alt="${escapeHtml(media.alt || title)}"`
+    ? ` data-expandable="true" data-full-src="${escapeHtml(assetUrl(media.src))}" data-caption="${escapeHtml(media.caption || media.alt || '')}" data-alt="${escapeHtml(media.alt || title)}"`
     : '';
 
   return `
     <figure class="project-media project-media-${variant}">
-      <img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt || title)}" loading="${escapeHtml(loading)}" decoding="${escapeHtml(decoding)}" fetchpriority="${escapeHtml(fetchPriority)}"${dataAttrs} />
+      <img src="${escapeHtml(assetUrl(media.src))}" alt="${escapeHtml(media.alt || title)}" loading="${escapeHtml(loading)}" decoding="${escapeHtml(decoding)}" fetchpriority="${escapeHtml(fetchPriority)}"${dataAttrs} />
       ${variant === 'cover' ? '' : `<figcaption>${escapeHtml(media.caption || '')}</figcaption>`}
     </figure>
   `;
@@ -171,7 +188,7 @@ const renderMediaGallery = (items = []) => {
             if (item.kind === 'video') {
               return `
                 <figure class="gallery-item gallery-item-video${item.wide ? ' gallery-item-wide' : ''}">
-                  <video src="${escapeHtml(item.src)}" controls preload="none" playsinline></video>
+                  <video src="${escapeHtml(assetUrl(item.src))}" controls preload="none" playsinline></video>
                   <figcaption>${escapeHtml(item.caption || '')}</figcaption>
                 </figure>
               `;
@@ -180,7 +197,7 @@ const renderMediaGallery = (items = []) => {
               return `
                 <figure class="gallery-item gallery-item-video gallery-item-embed${item.wide ? ' gallery-item-wide' : ''}">
                   <iframe
-                    src="${escapeHtml(item.src)}"
+                    src="${escapeHtml(assetUrl(item.src))}"
                     title="${escapeHtml(item.alt || 'Embedded media')}"
                     loading="lazy"
                     referrerpolicy="strict-origin-when-cross-origin"
@@ -193,9 +210,9 @@ const renderMediaGallery = (items = []) => {
             }
             return `
               <figure class="gallery-item${item.wide ? ' gallery-item-wide' : ''}">
-                <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt || 'Gallery image')}" loading="lazy" decoding="async" fetchpriority="low"
+                <img src="${escapeHtml(assetUrl(item.src))}" alt="${escapeHtml(item.alt || 'Gallery image')}" loading="lazy" decoding="async" fetchpriority="low"
                   data-expandable="true"
-                  data-full-src="${escapeHtml(item.src)}"
+                  data-full-src="${escapeHtml(assetUrl(item.src))}"
                   data-alt="${escapeHtml(item.alt || 'Gallery image')}"
                   data-caption="${escapeHtml(item.caption || '')}" />
                 <figcaption>${escapeHtml(item.caption || '')}</figcaption>
@@ -342,7 +359,7 @@ const renderDetailSections = (sections = []) => {
 
 const renderFlagshipSlide = (project, index) => `
   <article class="flagship-slide" data-slide-index="${index}" ${index === 0 ? '' : 'hidden'}>
-    <a class="flagship-slide-link" href="/projects/${escapeHtml(project.slug)}" data-router>
+    <a class="flagship-slide-link" href="${routeHref(`/projects/${project.slug}`)}" data-router>
       <div class="flagship-slide-media-wrap">
         ${renderMedia(project, 'cover', { loading: index === 0 ? 'eager' : 'lazy', fetchPriority: index === 0 ? 'high' : 'low' })}
       </div>
@@ -387,16 +404,16 @@ const renderFlagshipNav = () => `
 
 const renderFlagshipCard = (project) => `
   <article class="flagship-card">
-    <a class="flagship-card-media" href="/projects/${escapeHtml(project.slug)}" data-router>
+    <a class="flagship-card-media" href="${routeHref(`/projects/${project.slug}`)}" data-router>
       ${renderMedia(project, 'tile')}
     </a>
     <div class="flagship-card-body">
       <p class="section-kicker">${escapeHtml(project.cardDomain || project.domain)}</p>
-      <h3><a href="/projects/${escapeHtml(project.slug)}" data-router>${escapeHtml(project.title)}</a></h3>
+      <h3><a href="${routeHref(`/projects/${project.slug}`)}" data-router>${escapeHtml(project.title)}</a></h3>
       <p>${escapeHtml(project.summary)}</p>
       <div class="flagship-card-footer">
         <span>${escapeHtml(project.visibility)}</span>
-        <a class="inline-link" href="/projects/${escapeHtml(project.slug)}" data-router>Open project →</a>
+        <a class="inline-link" href="${routeHref(`/projects/${project.slug}`)}" data-router>Open project →</a>
       </div>
     </div>
   </article>
@@ -419,8 +436,8 @@ const renderCurrentRoleSection = (project) => {
         ${homeSummary}
         ${homeSectionNote ? `<p class="current-role-note">${escapeHtml(homeSectionNote)}</p>` : ''}
         <div class="hero-actions">
-          <a class="button-primary" href="/projects/${escapeHtml(project.slug)}" data-router>Open current role →</a>
-          <a class="button-secondary" href="/#featured">See selected projects</a>
+          <a class="button-primary" href="${routeHref(`/projects/${project.slug}`)}" data-router>Open current role →</a>
+          <a class="button-secondary" href="${routeHref('/', '#featured')}">See selected projects</a>
         </div>
       </div>
       <div class="current-role-media">
@@ -443,13 +460,13 @@ const renderArchiveGroup = (group) => {
           .map(
             (project) => `
               <article class="archive-item">
-                <a class="archive-item-media" href="/projects/${escapeHtml(project.slug)}" data-router>
+                <a class="archive-item-media" href="${routeHref(`/projects/${project.slug}`)}" data-router>
                   ${renderMedia(project, 'thumb')}
                 </a>
                 <div class="archive-item-copy">
                   <p class="archive-kicker">${escapeHtml(project.domain)}</p>
                   <h4>
-                    <a href="/projects/${escapeHtml(project.slug)}" data-router>${escapeHtml(project.title)}</a>
+                    <a href="${routeHref(`/projects/${project.slug}`)}" data-router>${escapeHtml(project.title)}</a>
                   </h4>
                   <p>${escapeHtml(project.summary)}</p>
                 </div>
@@ -471,7 +488,7 @@ const renderProjectIndex = () => `
       ${homeProjects
         .map(
           (project) => `
-            <a class="project-index-item" href="/projects/${escapeHtml(project.slug)}" data-router>
+            <a class="project-index-item" href="${routeHref(`/projects/${project.slug}`)}" data-router>
               <span>${escapeHtml(project.title)}</span>
               <small>${escapeHtml(project.domain)}</small>
             </a>
@@ -617,19 +634,19 @@ const renderHome = () => {
               : `<p class="hero-stage-intro">${escapeHtml(siteMeta.intro)}</p>`
           }
           <div class="hero-actions">
-            <a class="button-primary" href="/#current-role">Current role</a>
-            <a class="button-secondary" href="/#featured">Selected projects</a>
+            <a class="button-primary" href="${routeHref('/', '#current-role')}">Current role</a>
+            <a class="button-secondary" href="${routeHref('/', '#featured')}">Selected projects</a>
           </div>
         </div>
         <div class="hero-stage-portrait">
           <img class="hero-stage-portrait-img"
-               src="${escapeHtml(siteMeta.profile.src)}"
+               src="${escapeHtml(assetUrl(siteMeta.profile.src))}"
                alt="${escapeHtml(siteMeta.profile.alt)}"
                loading="eager"
                decoding="async"
                fetchpriority="high"
                data-expandable="true"
-               data-full-src="${escapeHtml(siteMeta.profile.src)}"
+               data-full-src="${escapeHtml(assetUrl(siteMeta.profile.src))}"
                data-alt="${escapeHtml(siteMeta.profile.alt)}"
                data-caption="${escapeHtml(siteMeta.profile.caption || '')}" />
         </div>
@@ -667,7 +684,7 @@ const renderHome = () => {
     <section class="section-block section-block-soft deferred-home-section" id="archive">
       <div class="section-heading section-heading-tight archive-section-heading">
         <div class="archive-section-intro">
-          <img class="archive-section-brand" src="/media/penn-logo.png" alt="University of Pennsylvania logo" loading="lazy" decoding="async" />
+          <img class="archive-section-brand" src="${assetUrl('/media/penn-logo.png')}" alt="University of Pennsylvania logo" loading="lazy" decoding="async" />
           <div class="archive-section-heading-copy">
             <p class="section-kicker section-kicker-home">Undergraduate work</p>
             <h2>Undergraduate-era projects across aerospace, robotics, software, and fabrication.</h2>
@@ -706,7 +723,7 @@ const renderProjectDetail = (project) => {
 
   app.innerHTML = `
     <article class="project-page project-page-shell">
-      <a class="back-link" href="/" data-router>← Back to portfolio</a>
+      <a class="back-link" href="${routeHref('/')}" data-router>← Back to portfolio</a>
 
       <section class="project-hero section-block ${wideHero ? 'project-hero-stacked' : ''}">
         ${wideHero ? `${heroLead}
@@ -809,7 +826,7 @@ const renderProjectDetail = (project) => {
       <section class="project-nav section-block section-block-soft">
         ${
           previous
-            ? `<a class="project-nav-link" href="/projects/${escapeHtml(previous.slug)}" data-router>
+            ? `<a class="project-nav-link" href="${routeHref(`/projects/${previous.slug}`)}" data-router>
                 <span class="note-label">Previous project</span>
                 <strong>${escapeHtml(previous.title)}</strong>
               </a>`
@@ -817,7 +834,7 @@ const renderProjectDetail = (project) => {
         }
         ${
           next
-            ? `<a class="project-nav-link project-nav-link-next" href="/projects/${escapeHtml(next.slug)}" data-router>
+            ? `<a class="project-nav-link project-nav-link-next" href="${routeHref(`/projects/${next.slug}`)}" data-router>
                 <span class="note-label">Next project</span>
                 <strong>${escapeHtml(next.title)}</strong>
               </a>`
@@ -834,7 +851,7 @@ const renderNotFound = () => {
     <section class="section-block not-found">
       <p class="section-kicker">Not found</p>
       <h1>That project does not exist in this portfolio.</h1>
-      <a class="button-primary" href="/" data-router>Return home</a>
+      <a class="button-primary" href="${routeHref('/')}" data-router>Return home</a>
     </section>
   `;
 };
@@ -878,8 +895,9 @@ document.addEventListener('click', (event) => {
   if (!sameOrigin(anchor.href)) return;
 
   const url = new URL(anchor.href);
-  const isInternalProject = url.pathname.startsWith('/projects/');
-  const isHomeNavigation = url.pathname === '/';
+  const routePath = stripBasePath(url.pathname);
+  const isInternalProject = routePath.startsWith('/projects/');
+  const isHomeNavigation = routePath === '/';
 
   if (!isInternalProject && !isHomeNavigation) return;
 

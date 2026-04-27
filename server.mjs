@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 4175);
+const BASE_PATH = '/maxim-portfolio';
 
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -48,7 +49,13 @@ const serveFile = async (res, filePath) => {
 
 createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || '127.0.0.1'}`);
-  const safePath = path.normalize(decodeURIComponent(url.pathname)).replace(/^([.][.][\/\\])+/, '');
+  const normalizedPath = path.normalize(decodeURIComponent(url.pathname)).replace(/^([.][.][\/\\])+/, '');
+  const safePath =
+    normalizedPath === BASE_PATH
+      ? '/'
+      : normalizedPath.startsWith(`${BASE_PATH}/`)
+        ? normalizedPath.slice(BASE_PATH.length) || '/'
+        : normalizedPath;
 
   if (safePath === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
