@@ -148,7 +148,7 @@ export const projects = [
       kind: 'image',
       src: '/media/nasa-simulation/future-flight-central.jpg',
       alt: 'Future Flight Central tower simulator at NASA Ames with operator stations and panoramic airport visuals.',
-      caption: 'Future Flight Central tower simulator at NASA Ames. Public NASA media.',
+      caption: 'Future Flight Central - air traffic control tower simulator at NASA Ames.',
       wide: true,
     },
     detailHeroMedia: {
@@ -158,7 +158,7 @@ export const projects = [
           kind: 'image',
           src: '/media/nasa-simulation/future-flight-central.jpg',
           alt: 'Future Flight Central tower simulator at NASA Ames with operator stations and panoramic airport visuals.',
-          caption: 'Future Flight Central tower simulator at NASA Ames. Public NASA media.',
+          caption: 'Future Flight Central - air traffic control tower simulator at NASA Ames.',
           wide: true,
         },
         {
@@ -175,7 +175,7 @@ export const projects = [
         kind: 'image',
         src: '/media/nasa-simulation/future-flight-central.jpg',
         alt: 'Future Flight Central tower simulator at NASA Ames with operator stations and panoramic airport visuals.',
-        caption: 'Future Flight Central tower simulator at NASA Ames. Public NASA media.',
+        caption: 'Future Flight Central - air traffic control tower simulator at NASA Ames.',
       },
       {
         kind: 'image',
