@@ -707,6 +707,7 @@ const renderHome = () => {
 const renderProjectDetail = (project) => {
   document.title = `${project.title} — Maxim Mounier`;
 
+  const detailSummary = project.detailSummary || project.summary;
   const currentIndex = projects.findIndex((entry) => entry.slug === project.slug);
   const previous = currentIndex > 0 ? projects[currentIndex - 1] : null;
   const next = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
@@ -716,7 +717,7 @@ const renderProjectDetail = (project) => {
     <div class="project-hero-copy">
       <p class="section-kicker">${escapeHtml(project.domain)}</p>
       ${renderDisplayTitle(project, 'h1')}
-      <p class="project-summary">${escapeHtml(project.summary)}</p>
+      <p class="project-summary">${escapeHtml(detailSummary)}</p>
     </div>
   `;
   const heroSupport = renderProjectHeroSupport(project);
@@ -754,8 +755,7 @@ const renderProjectDetail = (project) => {
               ? `
                 <div class="detail-panel detail-panel-article">
                   <div>
-                    <p class="panel-kicker">How it was shaped</p>
-                    <p>The decisions below are the ones that most influenced how the project works in practice.</p>
+                    <p class="panel-kicker">Key decisions</p>
                   </div>
                   ${renderBullets(project.approach)}
                 </div>
@@ -768,8 +768,7 @@ const renderProjectDetail = (project) => {
               ? `
                 <div class="detail-panel detail-panel-article">
                   <div>
-                    <p class="panel-kicker">Why it matters here</p>
-                    <p>${escapeHtml(project.homeBlurb)}</p>
+                    <p class="panel-kicker">Results</p>
                   </div>
                   ${renderBullets(project.outcomes)}
                 </div>
