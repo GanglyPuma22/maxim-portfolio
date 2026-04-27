@@ -29,6 +29,7 @@ test('NASA slideshow controls sit in a compact centered cluster', () => {
 
 test('fullscreen lightbox arrows sit near the image area', () => {
   assert.match(styles, /\.lightbox-figure\s*{[^}]*position:\s*relative/s);
+  assert.match(styles, /\.lightbox-close,\s*\.lightbox-nav\s*{[^}]*z-index:\s*3/s);
   assert.match(styles, /\.lightbox-nav-prev\s*{[^}]*left:\s*max\(18px,\s*calc\(\(100vw - min\(1280px,\s*92vw\)\) \/ 2 \+ 18px\)\)/s);
   assert.match(styles, /\.lightbox-nav-next\s*{[^}]*right:\s*max\(18px,\s*calc\(\(100vw - min\(1280px,\s*92vw\)\) \/ 2 \+ 18px\)\)/s);
 });
