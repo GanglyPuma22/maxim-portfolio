@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #08111d;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #f2f5f8;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(110, 167, 216, 0.12), transparent 28%),
+          linear-gradient(180deg, #102033 0%, #08111d 100%);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      .scene-content {
+        width: 100%;
+        height: 100%;
+        padding: 94px 104px;
+        display: flex;
+        gap: 40px;
+      }
+
+      .left-column,
+      .right-column {
+        height: 100%;
+      }
+
+      .left-column {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .right-column {
+        width: 55%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .eyebrow {
+        color: #d9a441;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .title,
+      .slide-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 700;
+        line-height: 0.96;
+        letter-spacing: -0.035em;
+        color: #f2f5f8;
+      }
+
+      .title {
+        font-size: 138px;
+        max-width: 760px;
+      }
+
+      .slide-title {
+        font-size: 108px;
+        max-width: 980px;
+      }
+
+      .support {
+        color: #d7e7f8;
+        font-size: 34px;
+        line-height: 1.28;
+        max-width: 760px;
+      }
+
+      .chip-row,
+      .card-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        background: rgba(18, 35, 56, 0.86);
+        border: 1px solid rgba(215, 231, 248, 0.18);
+        padding: 18px 22px;
+        color: #f2f5f8;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .hero-frame {
+        position: relative;
+        width: 100%;
+        height: 790px;
+        border-radius: 34px;
+        overflow: hidden;
+        border: 1px solid rgba(215, 231, 248, 0.14);
+        box-shadow: 0 30px 74px rgba(0, 0, 0, 0.24);
+      }
+
+      .hero-image,
+      .photo-image {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .hero-image {
+        background-image: url("assets/future-flight-central.jpg");
+        background-position: center center;
+      }
+
+      .hero-frame::after,
+      .photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(8, 17, 29, 0) 0%, rgba(8, 17, 29, 0.16) 100%);
+      }
+
+      .accent-bar {
+        position: absolute;
+        top: 92px;
+        right: 112px;
+        width: 176px;
+        height: 14px;
+        border-radius: 999px;
+        background: #fc3d21;
+      }
+
+      .three-up-layout {
+        width: 100%;
+        height: 100%;
+        padding: 94px 104px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+
+      .three-up-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .photo-card,
+      .closing-card {
+        border-radius: 28px;
+        overflow: hidden;
+        background: rgba(18, 35, 56, 0.88);
+        border: 1px solid rgba(215, 231, 248, 0.14);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+      }
+
+      .photo {
+        position: relative;
+        height: 320px;
+        overflow: hidden;
+      }
+
+      .photo-1 {
+        background-image: url("assets/future-flight-central.jpg");
+        background-position: center center;
+      }
+
+      .photo-2 {
+        background-image: url("assets/vertical-motion-simulator.jpg");
+        background-position: center center;
+      }
+
+      .photo-3 {
+        background-image: url("assets/aviation-systems-capabilities.jpg");
+        background-position: center center;
+      }
+
+      .photo-copy,
+      .closing-card {
+        padding: 22px 24px 26px;
+      }
+
+      .photo-copy h3,
+      .closing-card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 42px;
+        line-height: 1;
+        margin-bottom: 14px;
+      }
+
+      .photo-copy p,
+      .closing-card p {
+        color: #d7e7f8;
+        font-size: 28px;
+        line-height: 1.24;
+      }
+
+      .closing-stack {
+        width: 100%;
+        height: 100%;
+        padding: 94px 104px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="14"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="4.8" data-track-index="0">
+        <div class="accent-bar"></div>
+        <div class="scene-content">
+          <div class="left-column">
+            <div class="eyebrow">current role · NASA Ames SimLabs</div>
+            <div class="title">Simulation engineering for live research runs.</div>
+            <div class="support">
+              Integration, data collection, and operator tooling across the Vertical Motion Simulator and Future Flight Central.
+            </div>
+            <div class="chip-row">
+              <div class="chip">VMS integration</div>
+              <div class="chip">high-fidelity data</div>
+              <div class="chip">operator tools</div>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="hero-frame">
+              <div id="nasa-hero-image" class="hero-image"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scene-2" class="scene clip" data-start="4.55" data-duration="4.8" data-track-index="1">
+        <div class="three-up-layout">
+          <div class="eyebrow">what the work looks like</div>
+          <div class="slide-title">Three ideas. Three frames.</div>
+          <div class="three-up-grid">
+            <div class="photo-card">
+              <div class="photo">
+                <div id="nasa-photo-1" class="photo-image photo-1"></div>
+              </div>
+              <div class="photo-copy">
+                <h3>Facilities</h3>
+                <p>Operational simulators, not lab toys.</p>
+              </div>
+            </div>
+            <div class="photo-card">
+              <div class="photo">
+                <div id="nasa-photo-2" class="photo-image photo-2"></div>
+              </div>
+              <div class="photo-copy">
+                <h3>Discipline</h3>
+                <p>Data has to be trustworthy during the run.</p>
+              </div>
+            </div>
+            <div class="photo-card">
+              <div class="photo">
+                <div id="nasa-photo-3" class="photo-image photo-3"></div>
+              </div>
+              <div class="photo-copy">
+                <h3>Tools</h3>
+                <p>Researchers and operators need clean interfaces too.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scene-3" class="scene clip" data-start="9.1" data-duration="4.9" data-track-index="2">
+        <div class="closing-stack">
+          <div class="eyebrow">why it anchors the portfolio</div>
+          <div class="slide-title">It sets the tone for everything else here.</div>
+          <div class="card-row">
+            <div class="closing-card">
+              <h3>Embedded systems</h3>
+              <p>They come from the same operational mindset.</p>
+            </div>
+            <div class="closing-card">
+              <h3>Product UI</h3>
+              <p>The interface matters when the system is actually in use.</p>
+            </div>
+            <div class="closing-card">
+              <h3>Public-safe</h3>
+              <p>This is the clean portfolio cut, not the full internal story.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.from("#scene-1 .eyebrow", { y: 18, opacity: 0, duration: 0.42, ease: "power2.out" }, 0.25);
+      tl.from("#scene-1 .title", { y: 46, opacity: 0, duration: 0.68, ease: "expo.out" }, 0.42);
+      tl.from("#scene-1 .support", { y: 26, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.72);
+      tl.from("#scene-1 .chip", { y: 20, opacity: 0, duration: 0.44, stagger: 0.12, ease: "back.out(1.08)" }, 0.98);
+      tl.from("#scene-1 .accent-bar", { width: 0, duration: 0.4, ease: "power2.out" }, 0.3);
+      tl.from("#scene-1 .hero-frame", { x: 72, opacity: 0, duration: 0.74, ease: "power3.out" }, 0.46);
+      tl.to("#nasa-hero-image", { scale: 1.04, duration: 4.2, ease: "none" }, 0.2);
+
+      tl.to("#scene-1", { opacity: 0, x: -28, duration: 0.42, ease: "power2.inOut" }, 4.55);
+      tl.from("#scene-2", { opacity: 0, x: 46, duration: 0.46, ease: "power3.out" }, 4.55);
+      tl.from("#scene-2 .eyebrow", { y: 16, opacity: 0, duration: 0.4, ease: "power2.out" }, 4.76);
+      tl.from("#scene-2 .slide-title", { y: 44, opacity: 0, duration: 0.64, ease: "expo.out" }, 4.94);
+      tl.from("#scene-2 .photo-card", { y: 20, opacity: 0, duration: 0.48, stagger: 0.14, ease: "power3.out" }, 5.26);
+      tl.to("#nasa-photo-1", { scale: 1.045, duration: 4.0, ease: "none" }, 4.82);
+      tl.to("#nasa-photo-2", { scale: 1.045, duration: 4.0, ease: "none" }, 4.82);
+      tl.to("#nasa-photo-3", { scale: 1.045, duration: 4.0, ease: "none" }, 4.82);
+
+      tl.to("#scene-2", { opacity: 0, x: -26, duration: 0.42, ease: "power2.inOut" }, 9.1);
+      tl.from("#scene-3", { opacity: 0, x: 44, duration: 0.46, ease: "power3.out" }, 9.1);
+      tl.from("#scene-3 .eyebrow", { y: 16, opacity: 0, duration: 0.4, ease: "power2.out" }, 9.32);
+      tl.from("#scene-3 .slide-title", { y: 44, opacity: 0, duration: 0.64, ease: "expo.out" }, 9.5);
+      tl.from("#scene-3 .closing-card", { y: 18, opacity: 0, duration: 0.48, stagger: 0.14, ease: "power3.out" }, 9.96);
+      tl.to("#scene-3", { opacity: 0, duration: 0.46, ease: "power1.inOut" }, 13.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

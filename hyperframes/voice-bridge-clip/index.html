@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #f4efe7;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2833;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top right, rgba(46, 107, 255, 0.06), transparent 26%),
+          linear-gradient(180deg, #f7f1ea 0%, #f4efe7 100%);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      .scene-content {
+        width: 100%;
+        height: 100%;
+        padding: 96px 108px;
+        display: flex;
+        gap: 42px;
+      }
+
+      .left-column,
+      .right-column {
+        height: 100%;
+      }
+
+      .left-column {
+        width: 46%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .right-column {
+        width: 54%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .eyebrow {
+        color: #294f73;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .title,
+      .slide-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 700;
+        line-height: 0.96;
+        letter-spacing: -0.035em;
+        color: #1f2833;
+      }
+
+      .title {
+        font-size: 156px;
+        max-width: 720px;
+      }
+
+      .slide-title {
+        font-size: 112px;
+        max-width: 840px;
+      }
+
+      .support {
+        color: #44515e;
+        font-size: 34px;
+        line-height: 1.28;
+        max-width: 760px;
+      }
+
+      .chip-row,
+      .card-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        background: #fffdf9;
+        border: 1px solid rgba(41, 79, 115, 0.16);
+        padding: 18px 22px;
+        color: #294f73;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .screen-frame {
+        position: relative;
+        width: 100%;
+        border-radius: 34px;
+        overflow: hidden;
+        background: #fffdf9;
+        border: 1px solid rgba(41, 79, 115, 0.14);
+        box-shadow: 0 32px 78px rgba(31, 40, 51, 0.14);
+      }
+
+      .hero-screen {
+        height: 788px;
+      }
+
+      .detail-screen {
+        height: 770px;
+      }
+
+      .screen-image {
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/dashboard-screenshot.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .hero-image {
+        background-position: center top;
+      }
+
+      .detail-image {
+        background-position: center center;
+      }
+
+      .screen-glow {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 220px;
+        background: linear-gradient(180deg, rgba(255, 253, 249, 0) 0%, rgba(255, 253, 249, 0.55) 100%);
+      }
+
+      .accent-bar {
+        position: absolute;
+        top: 92px;
+        right: 116px;
+        width: 176px;
+        height: 14px;
+        border-radius: 999px;
+        background: #2e6bff;
+      }
+
+      .bullet-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        max-width: 800px;
+      }
+
+      .bullet {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 24px 28px;
+        border-radius: 26px;
+        background: #fffdf9;
+        border: 1px solid rgba(41, 79, 115, 0.14);
+        box-shadow: 0 18px 42px rgba(31, 40, 51, 0.08);
+      }
+
+      .bullet-dot {
+        width: 16px;
+        height: 16px;
+        margin-top: 11px;
+        border-radius: 999px;
+        background: #2e6bff;
+        flex: 0 0 auto;
+      }
+
+      .bullet-copy {
+        font-size: 34px;
+        line-height: 1.24;
+        color: #1f2833;
+      }
+
+      .card {
+        width: 398px;
+        min-height: 232px;
+        padding: 28px 30px;
+        border-radius: 28px;
+        background: #fffdf9;
+        border: 1px solid rgba(41, 79, 115, 0.14);
+        box-shadow: 0 20px 46px rgba(31, 40, 51, 0.08);
+      }
+
+      .card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 46px;
+        line-height: 1;
+        margin-bottom: 16px;
+        color: #1f2833;
+      }
+
+      .card p {
+        color: #44515e;
+        font-size: 30px;
+        line-height: 1.24;
+      }
+
+      .closing-layout {
+        width: 100%;
+        height: 100%;
+        padding: 96px 108px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="14.2"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="4.8" data-track-index="0">
+        <div class="accent-bar"></div>
+        <div class="scene-content">
+          <div class="left-column">
+            <div class="eyebrow">featured project · voice workflow</div>
+            <div class="title">Voice Bridge</div>
+            <div class="support">
+              A voice UI that knows when to stay conversational and when to hand real work off.
+            </div>
+            <div class="chip-row">
+              <div class="chip">live and local modes</div>
+              <div class="chip">explicit task handoff</div>
+              <div class="chip">server-side secrets</div>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="screen-frame hero-screen">
+              <div id="vb-hero-image" class="screen-image hero-image"></div>
+              <div class="screen-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scene-2" class="scene clip" data-start="4.55" data-duration="4.8" data-track-index="1">
+        <div class="scene-content">
+          <div class="left-column">
+            <div class="eyebrow">how it behaves</div>
+            <div class="slide-title">Quick turns stay in the call.</div>
+            <div class="bullet-stack">
+              <div class="bullet">
+                <div class="bullet-dot"></div>
+                <div class="bullet-copy">Short question. Short answer.</div>
+              </div>
+              <div class="bullet">
+                <div class="bullet-dot"></div>
+                <div class="bullet-copy">Longer request. Clear handoff into tracked work.</div>
+              </div>
+              <div class="bullet">
+                <div class="bullet-dot"></div>
+                <div class="bullet-copy">Status can come back into the session instead of disappearing.</div>
+              </div>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="screen-frame detail-screen">
+              <div id="vb-detail-image" class="screen-image detail-image"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scene-3" class="scene clip" data-start="9.1" data-duration="5.1" data-track-index="2">
+        <div class="closing-layout">
+          <div class="eyebrow">why it belongs in the portfolio</div>
+          <div class="slide-title">The interesting part is the boundary.</div>
+          <div class="card-row">
+            <div class="card">
+              <h3>Voice UI</h3>
+              <p>Fast enough to feel natural.</p>
+            </div>
+            <div class="card">
+              <h3>Trust</h3>
+              <p>No fake background magic. The handoff is explicit.</p>
+            </div>
+            <div class="card">
+              <h3>Workflow</h3>
+              <p>OpenClaw and Telegram pick up the longer work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.from("#scene-1 .eyebrow", { y: 18, opacity: 0, duration: 0.45, ease: "power2.out" }, 0.25);
+      tl.from("#scene-1 .title", { y: 48, opacity: 0, duration: 0.7, ease: "expo.out" }, 0.42);
+      tl.from("#scene-1 .support", { y: 28, opacity: 0, duration: 0.52, ease: "power2.out" }, 0.72);
+      tl.from("#scene-1 .chip", { y: 22, opacity: 0, duration: 0.44, stagger: 0.12, ease: "back.out(1.1)" }, 0.98);
+      tl.from("#scene-1 .accent-bar", { width: 0, duration: 0.42, ease: "power2.out" }, 0.3);
+      tl.from("#scene-1 .screen-frame", { x: 72, opacity: 0, duration: 0.74, ease: "power3.out" }, 0.46);
+      tl.to("#vb-hero-image", { scale: 1.04, duration: 4.2, ease: "none" }, 0.2);
+
+      tl.to("#scene-1", { opacity: 0, x: -28, duration: 0.42, ease: "power2.inOut" }, 4.55);
+      tl.from("#scene-2", { opacity: 0, x: 48, duration: 0.46, ease: "power3.out" }, 4.55);
+      tl.from("#scene-2 .eyebrow", { y: 16, opacity: 0, duration: 0.42, ease: "power2.out" }, 4.76);
+      tl.from("#scene-2 .slide-title", { y: 46, opacity: 0, duration: 0.66, ease: "expo.out" }, 4.94);
+      tl.from("#scene-2 .bullet", { y: 18, opacity: 0, duration: 0.48, stagger: 0.18, ease: "power3.out" }, 5.32);
+      tl.from("#scene-2 .detail-screen", { x: 70, opacity: 0, duration: 0.72, ease: "power3.out" }, 4.88);
+      tl.to("#vb-detail-image", { scale: 1.045, duration: 4.2, ease: "none" }, 4.64);
+
+      tl.to("#scene-2", { opacity: 0, x: -26, duration: 0.42, ease: "power2.inOut" }, 9.1);
+      tl.from("#scene-3", { opacity: 0, x: 44, duration: 0.46, ease: "power3.out" }, 9.1);
+      tl.from("#scene-3 .eyebrow", { y: 16, opacity: 0, duration: 0.4, ease: "power2.out" }, 9.32);
+      tl.from("#scene-3 .slide-title", { y: 44, opacity: 0, duration: 0.66, ease: "expo.out" }, 9.5);
+      tl.from("#scene-3 .card", { y: 20, opacity: 0, duration: 0.48, stagger: 0.14, ease: "power3.out" }, 9.98);
+      tl.to("#scene-3", { opacity: 0, duration: 0.46, ease: "power1.inOut" }, 13.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

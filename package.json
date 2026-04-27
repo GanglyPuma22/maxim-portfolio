@@ -1,0 +1,11 @@
+{
+  "name": "maxim-portfolio-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local-only first prototype for Maxim Mounier's portfolio site.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs"
+  }
+}

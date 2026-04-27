@@ -1,0 +1,48 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="40" fill="#F4EFE7"/>
+  <rect x="48" y="48" width="1504" height="804" rx="32" fill="#F8F4ED" stroke="#D7CFC3"/>
+  <text x="96" y="130" fill="#294F73" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24" letter-spacing="5">VOICE BRIDGE</text>
+  <text x="96" y="188" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="64">Voice in. Real work out.</text>
+  <text x="96" y="232" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="25">Two voice modes, one backend, explicit task handoff when a request stops being a short conversation.</text>
+
+  <rect x="96" y="312" width="236" height="228" rx="28" fill="#FFFDFC" stroke="#D8D1C5"/>
+  <text x="128" y="362" fill="#294F73" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="3">SURFACES</text>
+  <text x="128" y="420" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="38">Browser + mobile mic</text>
+  <text x="128" y="468" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Unified shell</text>
+  <text x="128" y="504" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Login-protected access</text>
+
+  <rect x="430" y="300" width="290" height="256" rx="32" fill="#22435A"/>
+  <text x="466" y="352" fill="#C8D7E6" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="3">CONTROL PLANE</text>
+  <text x="466" y="416" fill="#FFFFFF" font-family="Iowan Old Style, Georgia, serif" font-size="44">Voice Bridge backend</text>
+  <text x="466" y="466" fill="#D6E0EA" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Server-issued tokens</text>
+  <text x="466" y="502" fill="#D6E0EA" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Shared prompt + tool layer</text>
+  <text x="466" y="538" fill="#D6E0EA" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Task status + transcript store</text>
+
+  <rect x="818" y="248" width="260" height="150" rx="28" fill="#FFFDFC" stroke="#D8D1C5"/>
+  <text x="850" y="294" fill="#294F73" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="3">LIVE PATH</text>
+  <text x="850" y="352" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="34">ElevenLabs conversation</text>
+  <text x="850" y="388" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="22">Realtime speech loop</text>
+
+  <rect x="818" y="438" width="260" height="150" rx="28" fill="#FFFDFC" stroke="#D8D1C5"/>
+  <text x="850" y="484" fill="#294F73" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="3">LOCAL PATH</text>
+  <text x="850" y="542" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="34">Ollama + Whisper</text>
+  <text x="850" y="578" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="22">Browser TTS for private testing</text>
+
+  <rect x="1164" y="312" width="300" height="228" rx="32" fill="#FFFDFC" stroke="#D8D1C5"/>
+  <text x="1198" y="362" fill="#294F73" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="3">LONGER WORK</text>
+  <text x="1198" y="418" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="42">Tracked task handoff</text>
+  <text x="1198" y="468" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Explicit confirmation</text>
+  <text x="1198" y="504" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Telegram / OpenClaw execution</text>
+  <text x="1198" y="540" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">Status returned to the voice session</text>
+
+  <path d="M332 426H430" stroke="#294F73" stroke-width="8" stroke-linecap="round"/>
+  <path d="M720 368H818" stroke="#294F73" stroke-width="8" stroke-linecap="round"/>
+  <path d="M720 496H818" stroke="#294F73" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1078 426H1164" stroke="#294F73" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="770" cy="368" r="10" fill="#294F73"/>
+  <circle cx="770" cy="496" r="10" fill="#294F73"/>
+
+  <rect x="96" y="620" width="1368" height="160" rx="28" fill="#E9E0D3"/>
+  <text x="128" y="680" fill="#1F2833" font-family="Iowan Old Style, Georgia, serif" font-size="34">Why it belongs in the portfolio</text>
+  <text x="128" y="724" fill="#5D6774" font-family="Avenir Next, Segoe UI, Arial, sans-serif" font-size="24">It is a product problem, not just a voice demo: secure browser access, deterministic handoff, local-mode parity, and a cleaner truth boundary around what has actually been sent.</text>
+</svg>
