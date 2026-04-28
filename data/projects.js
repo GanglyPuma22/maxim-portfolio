@@ -508,14 +508,7 @@ export const projects = [
       caption: 'Short walkthrough from the v0.1 release.',
       wide: true,
     },
-    gallery: [
-      {
-        kind: 'image',
-        src: '/media/skill-viewer/clickthrough-large.png',
-        alt: 'Skill Viewer detail clickthrough showing skill metadata.',
-        caption: 'Detail clickthrough showing readiness and metadata.',
-      },
-    ],
+    gallery: [],
   },
   {
     slug: 'transcription-server',
@@ -574,7 +567,7 @@ export const projects = [
       kind: 'image',
       src: '/media/transcription-architecture.png',
       alt: 'Architecture diagram for the transcription server workflow.',
-      caption: 'Architecture diagram from the public repo README.',
+      caption: 'Pipeline from voice note to agent resuming work from it',
       wide: true,
     },
     gallery: [],
