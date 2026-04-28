@@ -363,21 +363,10 @@ const renderFlagshipSlide = (project, index) => `
         ${renderMedia(project, 'cover', { loading: index === 0 ? 'eager' : 'lazy', fetchPriority: index === 0 ? 'high' : 'low' })}
       </div>
       <div class="flagship-slide-overlay">
-        <div class="flagship-slide-topline">
-          <span class="flagship-slide-domain">${escapeHtml(project.domain)}</span>
-          <span class="flagship-slide-availability">${escapeHtml(project.visibility)}</span>
-        </div>
-        <div class="flagship-slide-bottom">
-          <div class="flagship-slide-meta">
-            <h2>${escapeHtml(project.title)}</h2>
-            <p class="flagship-slide-statement">${escapeHtml(project.heroStatement || project.summary)}</p>
-          </div>
-          <div class="flagship-slide-side">
-            <div class="flagship-slide-facts">
-              ${(project.heroFacts || []).map((fact) => `<span>${escapeHtml(fact)}</span>`).join('')}
-            </div>
-            <span class="flagship-cta">Open project →</span>
-          </div>
+        <div class="flagship-slide-copy">
+          <h2>${escapeHtml(project.title)}</h2>
+          <p class="flagship-slide-statement">${escapeHtml(project.heroStatement || project.summary)}</p>
+          <span class="flagship-cta">Open project →</span>
         </div>
       </div>
     </a>
@@ -385,19 +374,23 @@ const renderFlagshipSlide = (project, index) => `
 `;
 
 const renderFlagshipNav = () => `
-  <div class="flagship-nav">
-    ${flagshipDeck
-      .map(
-        (project, index) => `
-          <button class="flagship-nav-item ${index === 0 ? 'is-active' : ''}" type="button" data-slide-to="${index}" aria-label="Show ${escapeHtml(project.title)}" aria-pressed="${index === 0 ? 'true' : 'false'}">
-            <span class="flagship-nav-index">0${index + 1}</span>
-            <span class="flagship-nav-copy">
-              <strong>${escapeHtml(project.title)}</strong>
-            </span>
-          </button>
-        `,
-      )
-      .join('')}
+  <div class="flagship-nav-shell">
+    <button type="button" class="slide-nav-button" data-slide-nav="prev" aria-label="Previous project">←</button>
+    <div class="flagship-nav">
+      ${flagshipDeck
+        .map(
+          (project, index) => `
+            <button class="flagship-nav-item ${index === 0 ? 'is-active' : ''}" type="button" data-slide-to="${index}" aria-label="Show ${escapeHtml(project.title)}" aria-pressed="${index === 0 ? 'true' : 'false'}">
+              <span class="flagship-nav-index">0${index + 1}</span>
+              <span class="flagship-nav-copy">
+                <strong>${escapeHtml(project.title)}</strong>
+              </span>
+            </button>
+          `,
+        )
+        .join('')}
+    </div>
+    <button type="button" class="slide-nav-button" data-slide-nav="next" aria-label="Next project">→</button>
   </div>
 `;
 
@@ -411,7 +404,6 @@ const renderFlagshipCard = (project) => `
       <h3><a href="${routeHref(`/projects/${project.slug}`)}" data-router>${escapeHtml(project.title)}</a></h3>
       <p>${escapeHtml(project.summary)}</p>
       <div class="flagship-card-footer">
-        <span>${escapeHtml(project.visibility)}</span>
         <a class="inline-link" href="${routeHref(`/projects/${project.slug}`)}" data-router>Open project →</a>
       </div>
     </div>
@@ -658,10 +650,6 @@ const renderHome = () => {
       <div class="flagship-stage-head">
         <div>
           <p class="section-kicker section-kicker-home">Selected projects</p>
-        </div>
-        <div class="flagship-stage-controls">
-          <button type="button" class="slide-nav-button" data-slide-nav="prev" aria-label="Previous project">←</button>
-          <button type="button" class="slide-nav-button" data-slide-nav="next" aria-label="Next project">→</button>
         </div>
       </div>
       <div class="flagship-slides">

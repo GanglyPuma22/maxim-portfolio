@@ -297,10 +297,7 @@ export const projects = [
     stack: ['ESP32', 'Raspberry Pi', 'Firebase RTDB', 'PlatformIO', 'camera streaming'],
     privacyNote:
       'This page intentionally leaves out the old guest login, private deployment details, and any internal-only implementation notes that do not need to be public.',
-    links: [
-      { label: 'GitHub', url: 'https://github.com/GanglyPuma22/tank_control_system' },
-      { label: 'Demo video', url: 'https://www.youtube.com/watch?v=e1EvU5OcsTQ' },
-    ],
+    links: [{ label: 'Demo video', url: 'https://www.youtube.com/watch?v=e1EvU5OcsTQ' }],
     media: {
       kind: 'image',
       src: '/media/legacy/tank-hardware.jpg',
@@ -324,12 +321,6 @@ export const projects = [
       },
       {
         kind: 'image',
-        src: '/media/legacy/tank-camera-board.jpg',
-        alt: 'Tank camera board mounted on a perfboard.',
-        caption: 'Separate ESP32-CAM board. (Legacy)',
-      },
-      {
-        kind: 'image',
         src: '/media/legacy/yasha-closeup.jpg',
         alt: 'Close-up photo of Yasha the lizard inside the enclosure.',
         caption: 'The system has a real user, Yasha, even if he is a lizard.',
@@ -345,6 +336,12 @@ export const projects = [
         src: '/media/tank-control-system/stream-highlights.png',
         alt: 'Tank dashboard stream-highlights page showing saved camera snapshots from the live feed.',
         caption: 'Stream-highlights view for reviewing saved screenshots from the live camera feed.',
+      },
+      {
+        kind: 'image',
+        src: '/media/legacy/tank-camera-board.jpg',
+        alt: 'Tank camera board mounted on a perfboard.',
+        caption: 'Separate ESP32-CAM board. (Legacy)',
       },
     ],
   },
@@ -867,12 +864,12 @@ export const projects = [
     },
     gallery: [
       { kind: 'image', src: '/media/small-sada/final-assembly-diagram.png', alt: 'Annotated Small SADA assembly diagram calling out the internal mechanism and supporting structure.', caption: 'Annotated assembly diagram for the two-plate internal gear mechanism.', wide: true },
-      { kind: 'image', src: '/media/small-sada/system-block.png', alt: 'System block diagram for Small SADA.', caption: 'System block diagram.' },
-      { kind: 'image', src: '/media/small-sada/control-loop.png', alt: 'Control loop diagram for Small SADA.', caption: 'Control loop sketch.' },
-      { kind: 'image', src: '/media/small-sada/manufacturing.jpg', alt: 'Manufacturing photo for Small SADA.', caption: 'Manufacturing photo.' },
-      { kind: 'image', src: '/media/small-sada/cnc-toolpath.png', alt: 'CNC toolpath visualization for Small SADA.', caption: 'CNC toolpath in Mastercam.' },
-      { kind: 'image', src: '/media/small-sada/assembly-step.png', alt: 'Assembly step for Small SADA.', caption: 'Assembly step.' },
-      { kind: 'image', src: '/media/small-sada/integration.png', alt: 'Integration shot of Small SADA.', caption: 'Integration shot.' },
+      { kind: 'image', src: '/media/small-sada/system-block.png', alt: 'System block diagram for Small SADA.', caption: 'CAD view of top plate' },
+      { kind: 'image', src: '/media/small-sada/control-loop.png', alt: 'Control loop diagram for Small SADA.', caption: 'CAD view of bottom plate' },
+      { kind: 'image', src: '/media/small-sada/manufacturing.jpg', alt: 'Manufacturing photo for Small SADA.', caption: 'Manufactured bottom plate' },
+      { kind: 'image', src: '/media/small-sada/cnc-toolpath.png', alt: 'CNC toolpath visualization for Small SADA.', caption: 'Manufactured hinges that deploy SADA solar panels' },
+      { kind: 'image', src: '/media/small-sada/assembly-step.png', alt: 'Assembly step for Small SADA.', caption: 'Manufactured top plate with press fit internal gear' },
+      { kind: 'image', src: '/media/small-sada/integration.png', alt: 'Integration shot of Small SADA.', caption: 'Testing SADA\'s ability to align solar panels perpendicular to brightest light source' },
     ],
   },
   {

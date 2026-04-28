@@ -579,7 +579,6 @@ button:focus-visible {
 .flagship-stage-head {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
   gap: 18px;
 }
 
@@ -593,20 +592,15 @@ button:focus-visible {
   font-size: 1.12rem;
 }
 
-.flagship-stage-controls {
-  display: flex;
-  gap: 10px;
-}
-
 .slide-nav-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
   border: 1px solid var(--line-strong);
-  background: rgba(255, 255, 255, 0.56);
+  background: rgba(255, 255, 255, 0.66);
 }
 
 .flagship-slides {
@@ -649,9 +643,7 @@ button:focus-visible {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(14, 20, 26, 0.12), rgba(14, 20, 26, 0.75)),
-    linear-gradient(90deg, rgba(14, 20, 26, 0.42), rgba(14, 20, 26, 0.1));
+  background: linear-gradient(180deg, rgba(14, 20, 26, 0.06), rgba(14, 20, 26, 0.38) 56%, rgba(14, 20, 26, 0.68));
 }
 
 .flagship-slide-overlay {
@@ -659,53 +651,23 @@ button:focus-visible {
   inset: 0;
   z-index: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 26px;
+  align-items: flex-end;
+  padding: 28px;
   color: #f8f4ee;
 }
 
-.flagship-slide-topline,
-.flagship-slide-bottom,
 .tag-row,
 .hero-fact-row,
-.flagship-slide-facts,
 .flagship-card-footer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.flagship-slide-topline {
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.flagship-slide-domain,
-.flagship-slide-availability {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding: 0 12px;
-  border-radius: 999px;
-  background: rgba(248, 241, 232, 0.12);
-  border: 1px solid rgba(248, 241, 232, 0.14);
-  color: #f8f4ee;
-  font-size: 0.9rem;
-}
-
-.flagship-slide-bottom {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(240px, 0.92fr);
-  align-items: end;
-  gap: 24px;
-}
-
-.flagship-slide-meta {
+.flagship-slide-copy {
   display: grid;
   gap: 12px;
-  max-width: 60ch;
+  max-width: min(62ch, 72%);
 }
 
 .flagship-slide h2 {
@@ -723,15 +685,8 @@ button:focus-visible {
   max-width: 54ch;
 }
 
-.flagship-slide-side {
-  display: grid;
-  gap: 14px;
-  justify-items: start;
-}
-
 .tag,
-.hero-fact-pill,
-.flagship-slide-facts span {
+.hero-fact-pill {
   display: inline-flex;
   align-items: center;
   min-height: 34px;
@@ -743,32 +698,29 @@ button:focus-visible {
   font-size: 0.9rem;
 }
 
-.flagship-slide-facts {
-  gap: 8px;
-}
-
-.flagship-slide-facts span {
-  border-color: rgba(248, 241, 232, 0.14);
-  background: rgba(248, 241, 232, 0.12);
-  color: #f8f4ee;
-}
-
 .flagship-cta {
   font-size: 0.95rem;
   white-space: nowrap;
 }
 
+.flagship-nav-shell {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 10px;
+}
+
 .flagship-nav {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .flagship-nav-item {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 18px;
   border: 1px solid rgba(31, 40, 51, 0.08);
   background: rgba(255, 255, 255, 0.52);
@@ -1492,11 +1444,6 @@ button:focus-visible {
     max-width: none;
   }
 
-  .flagship-slide-topline {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
   .flagship-slides {
     aspect-ratio: 3 / 5;
   }
@@ -1505,8 +1452,8 @@ button:focus-visible {
     padding: 18px;
   }
 
-  .flagship-slide-bottom {
-    gap: 12px;
+  .flagship-slide-copy {
+    max-width: none;
   }
 
   .flagship-slide h2 {
@@ -1526,6 +1473,26 @@ button:focus-visible {
     padding-top: 7px;
     padding-bottom: 7px;
     line-height: 1.25;
+  }
+
+  .flagship-nav-shell {
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    gap: 8px;
+  }
+
+  .flagship-nav-item {
+    gap: 6px;
+    padding: 9px 8px;
+    border-radius: 14px;
+  }
+
+  .flagship-nav-index {
+    font-size: 1.15rem;
+  }
+
+  .flagship-nav-copy strong {
+    font-size: 0.86rem;
+    line-height: 1.18;
   }
 
   .inline-slideshow-arrow,
@@ -1656,23 +1623,14 @@ body.lightbox-open {
   overflow: hidden;
 }
 
-.flagship-stage-controls {
-  display: flex;
-  gap: 8px;
-}
-
 .slide-nav-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: rgba(255, 255, 255, 0.7);
+  flex: 0 0 auto;
   font-size: 1.05rem;
   cursor: pointer;
 }
 
 .slide-nav-button:hover {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 [data-expandable="true"] {
