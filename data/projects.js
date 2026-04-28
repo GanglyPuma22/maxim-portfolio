@@ -85,12 +85,15 @@ export const projects = [
     heroFacts: ['VMS integration', 'FFC visual systems', 'NLP transcription tooling'],
     challenge:
       'Most of the job lives inside active research runs. The simulator has to stay usable in real time, tower visuals have to stay smooth, and the data needs to be ready as soon as a session ends.',
+    roleLabel: 'What I owned',
     role:
       'I integrate researcher systems into the VMS, build tooling around FFC, and lead transcription and speaker-recognition work around recordings from both facilities. I also worked on public-facing monitoring and local-airspace software connected to Boeing\'s autonomous taxi tests at Ames.',
+    roleHtml:
+      'I integrate researcher systems into the VMS, build tooling around FFC, and lead transcription and speaker-recognition work around recordings from both facilities. I also worked on public-facing monitoring and local-airspace software connected to <a class="inline-rich-link" href="https://www.boeing.com/features/2025/06/boeing-teams-test-auto-airplane-taxiing" target="_blank" rel="noreferrer">Boeing\'s autonomous taxi tests</a> at Ames.',
     approach: [
-      'Integrated external researcher systems into the VMS while keeping the simulator usable during piloted runs.',
       'Built a Rust flight-data up-sampler for FFC\'s new image-generation system so 1 Hz aircraft data still looks smooth in the tower.',
-      'Kept the transcription work tied to real recorded sessions, speaker recognition, and the way researchers actually review runs afterward.',
+      'Started and led a simulation-audio transcription effort for VMS and FFC operations: defined the workflow, secured management approval, and hired and managed an intern across two summers.',
+      'Built the speech-dataset pipeline from 8+ hours of pilot audio and helped fine-tune and evaluate the transcription model, improving WER by 7% through preprocessing, labeling, and evaluation tooling.',
     ],
     outcomes: [
       'Research teams can bring new systems into the simulator environment without treating every run like a one-off setup.',
@@ -106,7 +109,7 @@ export const projects = [
       {
         title: 'Current SimLabs work',
         body:
-          'The day-to-day work is a mix of simulation plumbing and research support. Some problems are about getting outside systems into the VMS cleanly. Others are about making sure researchers leave a session with the data, visuals, and follow-up tools they need instead of another manual cleanup step.',
+          'The day-to-day work is a mix of simulation infrastructure development and research support. Some problems are about getting outside systems into the VMS or FFC cleanly. Others are about making sure researchers leave a session with the data, visuals, and follow-up tools they need instead of another manual cleanup step.',
         bullets: [
           'Integrate outside researcher systems into the VMS pipeline.',
           'Collect and preserve high-fidelity data during simulation sessions.',
@@ -117,16 +120,19 @@ export const projects = [
         title: 'Earlier NASA internship',
         body:
           'Before SimLabs, I interned in NASA\'s Advanced Supercomputing Division. I wrote Python tools to post-process rotor CFD results, compare them against experimental data, and automate the plots and test runs I kept repeating by hand.',
+        bodyHtml:
+          'Before SimLabs, I interned in NASA\'s Advanced Supercomputing Division. I wrote Python tools to post-process rotor CFD results, compare them against experimental data, and automate the plots and test runs I kept repeating by hand. That work led to <a class="inline-rich-link" href="https://www.researchgate.net/publication/384056717_Comparing_methods_to_extract_sectional_angle_of_attack_from_blade-resolved_rotor_simulations" target="_blank" rel="noreferrer">Comparing Methods to Extract Sectional Angle of Attack From Blade-Resolved Rotor Simulations</a>.',
         bullets: [
           'Built Python software to post-process CFD simulation results run on NASA supercomputers.',
           'Compared simulation outputs against experimental data and automated discrepancy plots and test runs.',
-          'Published and presented "Comparing Methods to Extract Sectional Angle of Attack From Blade-Resolved Rotor Simulations."',
         ],
       },
       {
         title: 'Boeing surrogate-operations support',
         body:
           'One public piece of the work supported Boeing\'s autonomous taxi demonstrations at Ames. My part was on the simulation and monitoring side around the surrogate Cessna Caravan and the local-airspace tooling used around that effort.',
+        bodyHtml:
+          'One public piece of the work supported <a class="inline-rich-link" href="https://www.boeing.com/features/2025/06/boeing-teams-test-auto-airplane-taxiing" target="_blank" rel="noreferrer">Boeing\'s autonomous taxi demonstrations</a> at Ames. My part was on the simulation and monitoring side around the surrogate Cessna Caravan and the local-airspace tooling used around that effort.',
         bullets: [
           'Developed software to monitor the surrogate Cessna Caravan during autonomous taxi testing.',
           'Built local-airspace display and software-emulation tools around the FFC environment.',
@@ -168,7 +174,7 @@ export const projects = [
           src: '/media/nasa-simulation/vertical-motion-simulator-full-view.png',
           alt: 'Full view of the Vertical Motion Simulator inside its ten-story tower at NASA Ames.',
           caption:
-            'The Vertical Motion Simulator is the world’s largest motion flight simulator moving within a 10 story tower at NASA Ames.',
+            'The Vertical Motion Simulator (VMS) is the world’s largest motion flight simulator moving within a 10 story tower at NASA Ames.',
         },
       ],
     },
@@ -184,7 +190,7 @@ export const projects = [
         src: '/media/nasa-simulation/vertical-motion-simulator-full-view.png',
         alt: 'Full view of the Vertical Motion Simulator inside its ten-story tower at NASA Ames.',
         caption:
-          'The Vertical Motion Simulator is the world’s largest motion flight simulator moving within a 10 story tower at NASA Ames.',
+          'The Vertical Motion Simulator (VMS) is the world’s largest motion flight simulator moving within a 10 story tower at NASA Ames.',
       },
       {
         kind: 'image',
@@ -211,13 +217,7 @@ export const projects = [
         src: '/media/nasa-simulation/vms-lunar-lander-cockpit.jpg',
         alt: 'Lunar lander cockpit configuration inside the Vertical Motion Simulator at NASA Ames.',
         caption: 'VMS Lunar Lander configuration with Bonnie Andro-Avila "flying" the Lunar Lander simulation from the left standing seat.',
-      },
-      {
-        kind: 'image',
-        src: '/media/nasa-simulation/vertical-motion-simulator-full-view.png',
-        alt: 'Full view of the Vertical Motion Simulator inside its ten-story tower at NASA Ames.',
-        caption:
-          'The Vertical Motion Simulator is the world’s largest motion flight simulator moving within a 10 story tower at NASA Ames.',
+        wide: true,
       },
       {
         kind: 'image',
@@ -244,51 +244,52 @@ export const projects = [
     visibility: 'Private system / public technical write-up',
     domain: 'Embedded / controls / cloud orchestration',
     summary:
-      'A long-running enclosure control stack built around ESP32 boards, a Raspberry Pi bridge, Firebase-backed configuration, and an operator-facing web surface for schedules, devices, sensors, and camera streaming.',
+      'An enclosure control stack I built for Yasha, split between ESP32 boards for device and sensor control and a Raspberry Pi that handles Firebase sync, the operator UI path, and much better video.',
     detailSummary:
-      'What started as a better way to run my lizard\'s enclosure turned into an embedded system I actually live with: ESP32 control boards, a Raspberry Pi bridge, Firebase-backed configuration, schedules, sensors, and a remote web UI.',
+      'What started as a better way to run my lizard\'s (Yasha\'s) enclosure turned into an embedded system I actually live with: ESP32 control boards, a Raspberry Pi bridge, Firebase-backed configuration, schedules, sensors, and a remote web UI.',
     homeBlurb:
       'It started as a better way to run a lizard tank. It now reads like a real embedded product with cloud state, local authority, and room to grow.',
     heroStatement:
       'Embedded control work that goes past relay toggles into real system boundaries.',
     heroFacts: ['ESP32 + Pi authority split', 'Firebase-configured devices', 'Schedules stay local enough to survive bridge trouble'],
     challenge:
-      'The hard part was not toggling relays. It was keeping schedules, sensor reads, desired state, reported state, and remote control from drifting out of sync once the system had to work every day.',
+      'The hard part was not toggling relays. It was keeping schedules, cloud state, sensors, and video from fighting each other once the system had to work every day.',
+    roleLabel: 'Project overview',
     role:
-      'I designed the architecture, wrote the firmware patterns, shaped the Firebase data model, and kept the system honest about desired state versus what the hardware was actually doing.',
+      'I designed the architecture, wrote the firmware patterns, shaped the Firebase data model, and kept the system honest about desired state versus what the hardware was actually doing. The current push is a cleaner Pi-first split for cloud and video work without giving up local control on the ESP32.',
     approach: [
-      'Kept always-on GPIO control and schedule evaluation on the ESP32 while the Pi handled cloud sync and heavier media work.',
-      'Let Firebase define which devices and sensors exist so the system can grow from configuration instead of firmware forks.',
+      'Moved Firebase, web-facing state, and heavier media work onto the Pi after the earlier all-ESP32 setup started hitting stream-quality and runtime-headroom limits.',
+      'Kept device control, sensor reads, and schedule evaluation on the main ESP32 so the enclosure still behaves correctly when the Pi or cloud path is unhealthy.',
       'Split desired state from reported state so automation, manual overrides, and actual hardware behavior can be debugged without guessing.',
     ],
     outcomes: [
-      'Adding or removing devices is now a configuration problem instead of a reflash-everything problem.',
-      'Schedules keep running on the board even when the Pi or cloud path is unhealthy.',
-      'Logs, UI state, and firmware all point to the same trigger identity, which makes failures much easier to trace.',
+      'The current direction is more stable because the Pi carries the cloud clients and video work instead of forcing that load onto the controller board.',
+      'The video path now has room for Pi-side ffmpeg and hardware encoding rather than staying stuck on the older VGA-ish ESP32-CAM lane.',
+      'Schedules and device control still stay local enough that the enclosure does not fall apart when the bridge is slow.',
     ],
     proofPoints: [
       'Repo README documents the v2 authority split, desired vs reported state, and schedule evaluation flow.',
-      'Hardware photos show the camera board, controller stack, and the physical environment the software was built for.',
-      'The public write-up is strong enough to explain the system without exposing internal access or private operating details.',
+      'The public page now separates the legacy demo hardware from the newer Pi-first architecture instead of blurring them together.',
+      'The system has a real user, Yasha, which kept the reliability bar honest from the start.',
     ],
     detailSections: [
       {
-        title: 'How it grew',
+        title: 'Why it changed',
         body:
-          'This started as a better way to manage Yasha\'s tank, then slowly stopped feeling like a weekend relay project. Once there were schedules, sensors, streaming, and remote control in the mix, the real job became preserving behavior I could trust day to day.',
+          'This started as a better way to manage Yasha\'s tank, then slowly stopped feeling like a weekend relay project. The older ESP-NOW plus ESP32-CAM build still works and still runs Yasha\'s enclosure, but it also made the limits obvious once I wanted better streaming and more cloud-connected behavior.',
         bullets: [
-          'Remote control mattered, but so did keeping the enclosure behavior sane when the network path misbehaved.',
-          'The camera ended up on a separate ESP32-CAM board because the physical setup and cabling wanted their own lane.',
+          'The legacy demo video is still relevant because it shows the real system that has been running the enclosure.',
+          'What changed was the architecture, not the fact that the older system worked.',
         ],
       },
       {
-        title: 'What had to stay local',
+        title: 'Why the Pi owns the heavy stuff now',
         body:
-          'The Pi/ESP32 split came out of experience, not theory. The Pi is great for cloud sync and video. The board is the part that should still know how to run the enclosure if the bridge is slow or offline.',
+          'The newer Pi-first split came out of two practical annoyances: poor stream quality and the ESP32 carrying Firebase clients it never really wanted. Moving that work onto the Pi made the whole system calmer and opened the door to a much faster video path.',
         bullets: [
-          'Schedules are evaluated locally on the main board instead of round-tripping through the Pi for every action.',
-          'Firebase stream updates are queued and applied in the main loop rather than inside the callback.',
-          'Desired and reported state stay separate so the web UI can show intent and reality without conflating them.',
+          'ESP32 still owns devices, sensors, and local schedule evaluation.',
+          'Pi handles Firebase sync, the operator-facing web path, and the higher-bandwidth video lane.',
+          'The current target is a better stream path, with 1080p at 30 fps instead of the older VGA-at-10-fps lane.',
         ],
       },
     ],
@@ -310,13 +311,14 @@ export const projects = [
       kind: 'embed',
       src: 'https://www.youtube.com/embed/e1EvU5OcsTQ?rel=0',
       alt: 'Tank Control System demo video.',
-      caption: 'Public demo video.',
+      caption:
+        '* Legacy demo of the earlier ESP-NOW + ESP32-CAM system that still runs Yasha\'s tank. The current architecture moves Firebase and video onto the Pi while the ESP32 handles devices, sensors, and TCP updates.',
     },
     gallery: [
       {
         kind: 'image',
-        src: '/media/tank-block-diagram-v2.png',
-        alt: 'Updated Tank Control System block diagram showing the cloud, board, bridge, and video-server split.',
+        src: '/media/tank-control-system/architecture-diagram-v4b.png',
+        alt: 'Updated Tank Control System architecture diagram showing the ESP32 runtime, Raspberry Pi runtime, Firebase services, and the video path.',
         caption: 'Updated control-system diagram showing the board, Pi bridge, cloud config, and video path.',
         wide: true,
       },
@@ -324,13 +326,25 @@ export const projects = [
         kind: 'image',
         src: '/media/legacy/tank-camera-board.jpg',
         alt: 'Tank camera board mounted on a perfboard.',
-        caption: 'Separate ESP32-CAM board.',
+        caption: 'Separate ESP32-CAM board. (Legacy)',
       },
       {
         kind: 'image',
         src: '/media/legacy/yasha-closeup.jpg',
         alt: 'Close-up photo of Yasha the lizard inside the enclosure.',
-        caption: 'The system has a real user, even if he is a lizard.',
+        caption: 'The system has a real user, Yasha, even if he is a lizard.',
+      },
+      {
+        kind: 'image',
+        src: '/media/tank-control-system/new-landing-page.png',
+        alt: 'New Tank Control System landing page showing the sign-in flow before entering the dashboard.',
+        caption: 'New landing page for the authenticated tank dashboard.',
+      },
+      {
+        kind: 'image',
+        src: '/media/tank-control-system/stream-highlights.png',
+        alt: 'Tank dashboard stream-highlights page showing saved camera snapshots from the live feed.',
+        caption: 'Stream-highlights view for reviewing saved screenshots from the live camera feed.',
       },
     ],
   },
@@ -355,8 +369,9 @@ export const projects = [
     heroFacts: ['Live and local voice modes', 'Tracked task handoff', 'Server-issued tokens, not browser secrets'],
     challenge:
       'The hard part was not speech recognition by itself. It was making voice feel honest: quick requests should stay conversational, longer work should turn into something trackable, and secrets should stay on the server.',
+    roleLabel: 'Project overview',
     role:
-      'I shaped the product, designed the backend contract, built the local-mode architecture, and defined the handoff between a voice conversation and a real piece of follow-up work.',
+      'I shaped the product, designed the backend contract, built the local-mode architecture, and defined the handoff between a voice conversation and a real piece of follow-up work. I also wired a Twilio phone path into the same live agent so I can reach the authenticated system from anywhere and keep working hands-free when opening the dashboard is inconvenient.',
     approach: [
       'Issued live-session tokens from the server so the browser never needs provider secrets.',
       'Kept live and local modes on one shared backend so task state, transcripts, and tool behavior do not drift into two different products.',
@@ -378,9 +393,9 @@ export const projects = [
         body:
           'I cared a lot about not turning this into separate apps glued together with shared branding. Live mode is faster and more polished. Local mode is cheaper, more private, and slower. They both needed to feel like the same tool.',
         bullets: [
-          'Live mode uses ElevenLabs for the speech loop.',
+          'Live mode uses ElevenLabs for the speech loop and stays behind authentication on the live site.',
           'Local mode uses Ollama plus Whisper, with the server still handling prompts, tools, and turn orchestration.',
-          'Both paths feed the same task, topic, and transcript model.',
+          'A Twilio-backed phone path can reach the same live agent when I want to keep working hands-free away from the dashboard.',
         ],
       },
       {
@@ -514,9 +529,9 @@ export const projects = [
     visibility: 'Public',
     domain: 'Voice infrastructure / deployment tooling',
     summary:
-      'A self-hosted speech-to-text deployment wrapper built so voice notes and Voice Bridge local-mode workflows can offload transcription to another box instead of bogging down the main workstation.',
+      'A self-hosted speech-to-text deployment wrapper built so voice notes can become prompts for my OpenClaw agent without bogging down the main workstation.',
     detailSummary:
-      'A separate box for Whisper so voice notes and local agent workflows stop dragging down the main machine.',
+      'A separate box for Whisper so I can send voice notes to my OpenClaw agent, have whatever I said become the prompt, and keep the main machine responsive.',
     homeBlurb:
       'Less about ML novelty than about keeping a useful workflow fast and boring in the best way.',
     heroStatement:
@@ -524,6 +539,7 @@ export const projects = [
     heroFacts: ['Pi-friendly default path', 'Optional NVIDIA fast path', 'Agent-friendly HTTP handoff'],
     challenge:
       'Voice notes are great until Whisper is running on the same machine as everything else. Then the nice workflow becomes the reason the rest of your day slows down.',
+    roleLabel: 'Project overview',
     role:
       'I packaged the deploy shape, helper scripts, and client workflow around one practical need: send audio away, get text back, and keep the main machine usable.',
     approach: [
@@ -545,10 +561,11 @@ export const projects = [
       {
         title: 'What it bought me',
         body:
-          'Once transcription moved off the main machine, voice notes became something I could use all day instead of something I avoided when the workstation was already busy.',
+          'Once transcription moved off the main machine, voice notes became something I could use all day instead of something I avoided when the workstation was already busy. That matters because for this workflow the voice note is the prompt: I say what I want, the agent gets text back, and I skip a lot of typing.',
         bullets: [
-          'Safe default bind is localhost, not wide-open network exposure.',
-          'The optional GPU path exists for the moments when low latency actually matters, but it stays an explicit opt-in.',
+          'The GPU-box path gives me very fast transcription when the main laptop is up, without freezing OpenClaw under Whisper load.',
+          'The Pi path is slower but stays available, which means voice-note prompting still works even when the faster machine is off.',
+          'The point of the repo is interaction quality, not speech-to-text purity tests in isolation.',
         ],
       },
     ],
@@ -585,6 +602,7 @@ export const projects = [
     heroFacts: ['Realtime multiplayer', 'Drag-first move previews', 'Same-browser rejoin flow'],
     challenge:
       'Cuarenta gets messy fast. The UI has to help players read the board, understand captures, and recover from disconnects without turning the whole thing into a rules lecture.',
+    roleLabel: 'Project overview',
     role:
       'I owned the React rewrite, the board-centered layout, the Firebase-backed multiplayer flow, the rejoin path, and most of the interaction decisions that make the game readable.',
     approach: [
@@ -610,15 +628,6 @@ export const projects = [
         bullets: [
           'Host creates a room quickly, shares a short code or link, and players can reconnect in the same browser without much ceremony.',
           'Move previews happen right on the board so captures are visible before someone commits the card.',
-        ],
-      },
-      {
-        title: 'What still blocks public release',
-        body:
-          'The interface is ahead of the trust model. Firebase anonymous auth is a good fit for casual private games, but a malicious client can still try to submit bad state.',
-        bullets: [
-          'The repo now defaults to emulator-first local setup and a safer config posture.',
-          'There is still no server-side move validation, rate limiting, or abuse review path.',
         ],
       },
     ],
@@ -656,51 +665,41 @@ export const projects = [
   {
     slug: 'ahto',
     title: 'AHTO',
-    eyebrow: 'Featured · testing infrastructure · public v0.1 surface',
+    eyebrow: 'Featured · testing infrastructure · public-safe repo',
     tier: 'featured',
-    status: 'Public v0.1',
-    visibility: 'Public v0.1 repo',
+    status: 'Public-safe repo / release still pending',
+    visibility: 'Public-safe repo / broader release pending',
     domain: 'Integration testing / workflow design',
     summary:
-      'A test-matrix-driven integration testing surface that preserves the workflow model, adapter contracts, and durable output artifacts without publishing the private setup that originally surrounded it.',
+      'A test-matrix-driven integration testing framework I started to speed up work on the Tank Control System, then generalized into a public-safe review surface.',
     detailSummary:
-      'AHTO is my public cut of a broader integration-testing approach. The core idea is simple: drive runs from a matrix, check the hardware and runtime state first, then emit evidence that tells you what failed and why.',
+      'AHTO started as something I wanted for myself while building the Tank Control System: a way to run structured hardware, software, and UI checks from a real matrix and keep the evidence organized. The broader release is still pending.',
     homeBlurb:
-      'The value here is judgment: what to package, what to document, and what to keep out of the public repo.',
+      'The value here is judgment: what to package, what to document, and what to leave for the later release.',
     heroStatement:
-      'A public testing surface trimmed down to the parts that actually travel well.',
+      'A reviewable testing framework that grew out of real hardware-system work.',
     heroFacts: ['Matrix-driven runs', 'Hardware sync gate', 'Defect and run-summary artifacts'],
     challenge:
-      'The hard part was figuring out what could travel into a public repo without dragging along a bunch of private lab assumptions.',
+      'The hard part was turning a tool built for my own tank-development workflow into something public without pretending the first repo cut already showed the whole framework.',
+    roleLabel: 'Project overview',
     role:
-      'I defined the public boundary, wrote the docs and contracts, and built the example and review flow that makes the testing model inspectable offline.',
+      'I designed the workflow, matrix structure, hardware-sync gate, and evidence outputs, then carved out a public-safe repo that shows the model without pretending the release is finished.',
     approach: [
-      'Centered the repo on the matrix, the artifact contracts, and one end-to-end example instead of the private glue that originally surrounded it.',
+      'Started from the testing pain in Tank Control System development, where hardware, software, and UI checks all needed to line up against the same matrix.',
       'Kept hardware sync as a first-class gate because stale device state can make an otherwise good test run meaningless.',
-      'Built an offline review runner so the public repo demonstrates real orchestration, not just diagrams.',
+      'Built a public-safe review runner and example pack so someone can inspect the approach offline without needing my private environment.',
     ],
     outcomes: [
       'Reviewers can follow the model without credentials, hardware access, or browser-profile secrets.',
-      'The repo now shows how rows are classified and how run evidence is emitted, not just how the files are named.',
-      'It stays honest about being a portable public slice rather than the whole private system.',
+      'The repo shows the matrix, contracts, and evidence shape clearly enough to explain the framework direction.',
+      'Broader release is still pending, which is better than pretending the framework is more finished than it is.',
     ],
     proofPoints: [
       'Architecture docs explain the three-layer model clearly: core, adapters, and examples.',
-      'The public v0.1 surface is intentionally narrow and reviewable offline.',
-      'The repo keeps private environment details out while preserving the workflow itself.',
+      'The current repo is reviewable offline and keeps private environment details out.',
+      'The framework came out of real tank-control testing work instead of a generic testing thought experiment.',
     ],
-    detailSections: [
-      {
-        title: 'What the repo actually proves',
-        body:
-          'The public version is intentionally narrow. I wanted someone to be able to read it and understand the testing approach without me hand-waving away the missing pieces.',
-        bullets: [
-          'Core contracts define row shape, modes, outcomes, and artifact structure.',
-          'The review runner validates a profile and matrix, runs the hardware gate, and emits sample artifacts from fixture results.',
-          'The example pack shows working matrices versus promoted checkpoints.',
-        ],
-      },
-    ],
+    detailSections: [],
     sourceNotes: ['open-source-repos/AHTO/README.md', 'open-source-repos/AHTO/docs/architecture.md'],
     stack: ['Node.js', 'test matrices', 'adapter contracts', 'artifact emitters', 'documentation'],
     privacyNote: 'Public repo by design, with internal environment details intentionally stripped out.',
@@ -730,6 +729,7 @@ export const projects = [
     homeBlurb: 'Aerospace weight that still feels real.',
     challenge:
       'The work mixed controls thinking with manufacturing reality: sensors, RPM feedback, thrust measurement, and parts that had to survive actual test hardware.',
+    roleLabel: 'What I owned',
     role:
       'I worked on the electronics and controls side, including Hall-effect and load-cell sensing, hardware for an electronic ducted fan test rig, and manufacturing support around the engine build.',
     approach: [
@@ -817,7 +817,8 @@ export const projects = [
       'Senior design project for a two-degree-of-freedom solar array drive assembly sized for a 3U CubeSat. My biggest chunk of the work was the body and yaw mechanism, especially the two-plate internal gear design and the machining needed to make it real.',
     homeBlurb: 'One of the strongest archive items because the evidence packet is unusually solid.',
     challenge:
-      'The project packed controls, mechanism design, manufacturing, and integration into one tight package. The hard part was getting the moving parts and wiring to coexist instead of solving each subsystem in isolation.',
+      'The project packed controls, mechanism design, manufacturing, and integration into one tight package. The hard part was designing the system to conform to the tight constraints imposed by the 3U CubeSat chassis, and the unique challenges of designing a system for space.',
+    roleLabel: 'What I owned',
     role:
       'I designed and manufactured the body of the system, built the two-plate internal gear mechanism for yaw rotation, generated the CNC toolpaths, and helped with final integration. When the top wiring started tangling after a full revolution, I also pushed the slip-ring fix and integrated it into the assembly.',
     approach: [
@@ -865,20 +866,19 @@ export const projects = [
       wide: true,
     },
     gallery: [
-      { kind: 'image', src: '/media/small-sada/final-assembly-diagram.png', alt: 'Annotated Small SADA assembly diagram calling out the internal mechanism and supporting structure.', caption: 'Annotated assembly diagram for the two-plate internal gear mechanism.' },
+      { kind: 'image', src: '/media/small-sada/final-assembly-diagram.png', alt: 'Annotated Small SADA assembly diagram calling out the internal mechanism and supporting structure.', caption: 'Annotated assembly diagram for the two-plate internal gear mechanism.', wide: true },
       { kind: 'image', src: '/media/small-sada/system-block.png', alt: 'System block diagram for Small SADA.', caption: 'System block diagram.' },
       { kind: 'image', src: '/media/small-sada/control-loop.png', alt: 'Control loop diagram for Small SADA.', caption: 'Control loop sketch.' },
       { kind: 'image', src: '/media/small-sada/manufacturing.jpg', alt: 'Manufacturing photo for Small SADA.', caption: 'Manufacturing photo.' },
       { kind: 'image', src: '/media/small-sada/cnc-toolpath.png', alt: 'CNC toolpath visualization for Small SADA.', caption: 'CNC toolpath in Mastercam.' },
       { kind: 'image', src: '/media/small-sada/assembly-step.png', alt: 'Assembly step for Small SADA.', caption: 'Assembly step.' },
       { kind: 'image', src: '/media/small-sada/integration.png', alt: 'Integration shot of Small SADA.', caption: 'Integration shot.' },
-      { kind: 'image', src: '/media/small-sada/test-plot.png', alt: 'Test plot from Small SADA.', caption: 'Test data plot.' },
     ],
   },
   {
     slug: 'graduate-robotics',
-    title: 'Graduate Robotics — Block Stacking',
-    titleLines: ['Graduate Robotics', 'Block Stacking'],
+    title: 'Robotic Course - Block Stacking',
+    titleLines: ['Robotic Course -', 'Block Stacking'],
     eyebrow: 'Robotics · 7-DOF arm · simulation + hardware',
     tier: 'archive',
     status: 'Graduate course project',
@@ -891,6 +891,7 @@ export const projects = [
     homeBlurb: 'Compact robotics proof: kinematics, planning, and hardware validation in one project.',
     challenge:
       'The interesting part was the jump from ROS and Gazebo to hardware. Planning that looks fine in sim gets much more honest once a real arm has to hit the same moves.',
+    roleLabel: 'What I owned',
     role:
       'I implemented the kinematics stack and planners, tested them in simulation, then carried them onto the lab arm and added the final block-detection and stacking pipeline.',
     approach: [
@@ -971,10 +972,11 @@ export const projects = [
     summary:
       'A graduate mechatronics project: an ESP32-driven car that follows walls with ultrasound sensors and detects an IR beacon several meters out using a filtered double op-amp circuit hand-soldered for the project.',
     detailSummary:
-      'Graduate mechatronics project built around a small ESP32 car that had to follow walls and find an IR beacon during a real demo.',
+      'Graduate-level mechatronics course where for the final project my team built a small ESP32 car that had to follow walls and find an IR beacon during a real demo.',
     homeBlurb: 'Supporting mechatronics evidence with a real circuit and a real demo.',
     challenge:
       'The control logic was only half the work. The beacon had to be detectable from across the room, and the sensing chain had to be good enough that the car did not fall apart in the live run.',
+    roleLabel: 'What I owned',
     role:
       'I wrote the ESP32 firmware in C++, designed and soldered the filtered double op-amp circuit for the IR detector, and tuned the wall-following and beacon-finding behavior.',
     approach: [
@@ -1014,7 +1016,7 @@ export const projects = [
       caption: 'Public demo short.',
     },
     gallery: [
-      { kind: 'image', src: '/media/semi-autonomous-car/wall-following.jpg', alt: 'Wall-following test for the car.', caption: 'Wall-following test.' },
+      { kind: 'image', src: '/media/semi-autonomous-car/wall-following.jpg', alt: 'Wall-following test for the car.', caption: 'I designed and soldered the diode input signal processing circuit for the IR beacon detection.' },
       { kind: 'image', src: '/media/semi-autonomous-car/full-car-view.png', alt: 'Final build of the semi-autonomous car.', caption: 'Final Car Design - Fully Built' },
     ],
   },
@@ -1094,6 +1096,7 @@ export const projects = [
     homeBlurb: 'Range proof from the shop floor.',
     challenge:
       'The useful part of this project was learning what machining mistakes look like in real parts, not just in a CAD model.',
+    roleLabel: 'Project overview',
     role:
       'Designed, machined, and assembled the engine for the course build.',
     approach: [
@@ -1120,9 +1123,13 @@ export const projects = [
       caption: 'Public demo short.',
     },
     gallery: [
-      { kind: 'image', src: '/media/heat-engine/build-1.jpg', alt: 'Heat engine build photo 1.', caption: 'Build photo.' },
-      { kind: 'image', src: '/media/heat-engine/build-2.jpg', alt: 'Heat engine build photo 2.', caption: 'Another build photo.' },
-      { kind: 'image', src: '/media/legacy/heat-engine.jpg', alt: 'Heat engine setup outdoors.', caption: 'Outdoor test setup.' },
+      {
+        kind: 'image',
+        src: '/media/heat-engine/parts-created.png',
+        alt: 'Numbered diagram of the heat-engine parts manufactured from scratch for the final assembly.',
+        caption: 'Numbered diagram of the parts I manufactured from scratch to complete the final heat engine assembly',
+        wide: true,
+      },
     ],
   },
   {
@@ -1134,19 +1141,35 @@ export const projects = [
     visibility: 'Public report and video',
     domain: 'Mechanism design / fabrication',
     summary:
-      'Carousel sub-team project focused on bevel-gear drive design, moving assemblies, and fabrication for a collaborative mechanical build.',
+      'Carousel sub-team project focused on the horse and driveshaft system inside a collaborative mechanical build, including bevel gears, couplings, supports, and interference cleanup across a shared assembly.',
+    detailSummary:
+      'This was a distributed mechanical build with four sub-teams acting like separate engineering groups. My lane was the horse and driveshaft system, which meant designing the bevel-gear path, couplings, and support hardware while making sure the full carousel still fit together.',
     homeBlurb: 'A well-documented archive piece with actual mechanism interest.',
     challenge:
-      'Different subassemblies had to fit and move together without colliding once the full build came together.',
+      'Different subassemblies were designed in parallel, so the real job was making the moving pieces clear a common assembly instead of looking good in isolation.',
+    roleLabel: 'What I owned',
     role:
-      'Worked on the bevel-gear drive and helped fabricate the sub-team hardware.',
+      'I worked on the horse and driveshaft sub-team: designed the bevel-gear system, shaft couplings, latches, and supporting casings, then helped fabricate and fit that hardware into the full assembly.',
     approach: [
-      'Focused on the drive-train geometry and the practical fit-up between moving parts and the rest of the team build.'
+      'Designed the bevel gear so one motor could drive both the carousel rotation and the horse shaft motion in another degree of freedom.',
+      'Built shaft couplings and latches that allowed a full rotation without interfering with the horse dowels.',
+      'Worked through fit-up issues online with the other sub-teams because the final assembly only works if everyone\'s geometry agrees.',
     ],
     outcomes: [
-      'A short project page, but it still captures real mechanism-design and fabrication work.'
+      'Ended with a mechanism that translated one drive input into both carousel rotation and the up/down horse motion.',
+      'The project made interference and tolerance issues impossible to ignore, which is exactly why it was useful.',
     ],
-    detailSections: [],
+    detailSections: [
+      {
+        title: 'Distributed build, real interference',
+        body:
+          'The goal was a full mechanical assembly built by four sub-teams working like separate engineering groups in different locations. That meant the hard part was not just my own CAD. It was resolving interference between sub-team components before the final build turned into a pile of mismatched assumptions.',
+        bullets: [
+          'My sub-team owned the horse and driveshaft system.',
+          'We designed around the real assembly constraints, not just a clean standalone mechanism.',
+        ],
+      },
+    ],
     sourceNotes: ['old portfolio slides 15-16'],
     stack: ['mechanism design', 'fabrication'],
     privacyNote: 'Safe to reference from public report and video.',
@@ -1167,11 +1190,8 @@ export const projects = [
       caption: 'Public demo short.',
     },
     gallery: [
-      { kind: 'image', src: '/media/carousel/bevel-detail.png', alt: 'Bevel gear detail.', caption: 'Bevel gear drive detail.' },
-      { kind: 'image', src: '/media/carousel/exploded-view.png', alt: 'Exploded view of the carousel.', caption: 'Exploded view.' },
-      { kind: 'image', src: '/media/carousel/build-photo.jpg', alt: 'Carousel build photo.', caption: 'Build photo.' },
-      { kind: 'image', src: '/media/carousel/render.png', alt: 'Carousel render.', caption: 'Render of the assembled carousel.' },
-      { kind: 'image', src: '/media/legacy/carousel-assembly.webp', alt: 'CAD assembly view.', caption: 'Earlier assembly view.' },
+      { kind: 'image', src: '/media/carousel/bevel-detail.png', alt: 'Bevel gear detail.', caption: 'Carousel top-plate drive train assembly' },
+      { kind: 'image', src: '/media/carousel/exploded-view.png', alt: 'Exploded view of the carousel.', caption: 'Bevel Gear System - transferring the carousel center shaft rotation into the up/down motion for the horses' },
     ],
   },
   {
@@ -1187,6 +1207,7 @@ export const projects = [
     homeBlurb: 'Light archive texture from the energy side of the engineering record.',
     challenge:
       'This was a simple prototype, but it still had to be built and tested honestly enough that the results meant something.',
+    roleLabel: 'What I owned',
     role:
       'Helped build the turbine and run the tests.',
     approach: [
@@ -1226,29 +1247,41 @@ export const projects = [
     eyebrow: 'Build systems · structural redesign',
     tier: 'archive',
     status: 'Team project',
-    visibility: 'Public report and video',
+    visibility: 'Public video',
     domain: 'Build systems / structural thinking',
     summary:
-      'A water tower build with structural redesign after the first buckling-prone version failed load testing.',
+      'A team water-tower build where the job was not just to hold a bucket of water, but to redirect that water through a nozzle strongly enough to shove a puck into competing towers.',
+    detailSummary:
+      'This project was a full system problem: pump, structure, and nozzle. The tower had to survive being filled, then use that water to push a puck against another team\'s design in the final head-to-head stage.',
     homeBlurb: 'Useful part of the earlier build-system record.',
     challenge:
-      'The first structure buckled under load, so the real project became the redesign.',
+      'The first structure buckled under load, so we had to redesign the tower while also keeping the nozzle and competition objective in view.',
+    roleLabel: 'What I owned',
     role:
-      'Helped work through the redesign and rebuild after the first version failed.',
+      'I helped work through the redesign and rebuild after the first version failed, treating the tower, nozzle, and competition behavior as one connected system.',
     approach: [
-      'Used the failure of the first tower to rethink the structure, then rebuilt and tested the revised version.'
+      'Used the failure of the first tower to rethink the joints, then rebuilt and tested the revised structure.',
+      'Treated the nozzle as part of the actual competition objective, not an afterthought after the fill stage.',
     ],
     outcomes: [
-      'The better lesson here was not the first design. It was seeing the failure, changing the structure, and getting the second pass to hold up better.'
+      'The better lesson here was not the first design. It was seeing the failure, changing the structure, and getting the second pass to behave much better.',
+      'The project made stability, pumping, and nozzle design answer to the same real competition instead of three separate mini-problems.',
     ],
-    detailSections: [],
+    detailSections: [
+      {
+        title: 'What the build actually had to do',
+        body:
+          'The point was to build a structure capable of supporting a bucket of water while it filled, then redirect that water through a nozzle to push a puck against another team\'s tower. That made it a combined stability, pumping, and nozzle-design problem from the start.',
+        bullets: [
+          'Redesign mattered because the first tower failed under load, not because redesign was the whole goal.',
+          'The nozzle had to work in the final puck-battle stage, not just look reasonable in CAD.',
+        ],
+      },
+    ],
     sourceNotes: ['old portfolio slide 18'],
     stack: ['structural build', 'documentation'],
     privacyNote: 'Public artifacts.',
-    links: [
-      { label: 'Report', url: 'https://docs.google.com/document/d/1cxEeilRerLbGmpuzYxOFmSWV113a8c4KT8Hc7rt-L9w/edit' },
-      { label: 'Demo short', url: 'https://youtube.com/shorts/uo-GWIRv1Ww' },
-    ],
+    links: [{ label: 'Demo short', url: 'https://youtube.com/shorts/uo-GWIRv1Ww' }],
     media: {
       kind: 'image',
       src: '/media/water-tower/cad-1.png',
@@ -1262,10 +1295,9 @@ export const projects = [
       caption: 'Public demo short.',
     },
     gallery: [
-      { kind: 'image', src: '/media/water-tower/cad-2.png', alt: 'Second water tower CAD view.', caption: 'Second CAD view.' },
-      { kind: 'image', src: '/media/water-tower/diagram.png', alt: 'Water tower diagram.', caption: 'Structural diagram.' },
-      { kind: 'image', src: '/media/water-tower/build-1.jpg', alt: 'Water tower build photo 1.', caption: 'Build photo.' },
-      { kind: 'image', src: '/media/water-tower/build-2.jpg', alt: 'Water tower build photo 2.', caption: 'Another build photo.' },
+      { kind: 'image', src: '/media/water-tower/cad-2.png', alt: 'Second water tower CAD view.', caption: 'Improved tower joint design.' },
+      { kind: 'image', src: '/media/water-tower/build-1.jpg', alt: 'Water tower build photo 1.', caption: 'Final 3D printed nozzle.' },
+      { kind: 'image', src: '/media/water-tower/build-2.jpg', alt: 'Water tower build photo 2.', caption: 'Final built water tower structure.' },
     ],
   },
 ];

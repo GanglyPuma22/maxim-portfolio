@@ -149,9 +149,8 @@ const renderMediaGallery = (items = []) => {
 
   return `
     <section class="media-gallery section-block section-block-soft">
-      <div class="section-heading section-heading-tight">
-        <p class="section-kicker">Selected media</p>
-        <h2>Selected visuals.</h2>
+      <div class="media-gallery-heading">
+        <h2>Selected media</h2>
       </div>
       <div class="media-gallery-grid">
         ${items
@@ -348,7 +347,7 @@ const renderDetailSections = (sections = []) => {
         <section class="detail-panel detail-panel-article">
           <div>
             <p class="panel-kicker">${escapeHtml(section.title)}</p>
-            <p>${escapeHtml(section.body)}</p>
+            <p>${section.bodyHtml || escapeHtml(section.body)}</p>
           </div>
           ${section.bullets?.length ? renderBullets(section.bullets) : ''}
         </section>
@@ -743,8 +742,8 @@ const renderProjectDetail = (project) => {
         <div class="project-main-column">
           <div class="detail-panel detail-panel-article">
             <div>
-              <p class="panel-kicker">What I owned</p>
-              <p>${escapeHtml(project.role)}</p>
+              <p class="panel-kicker">${escapeHtml(project.roleLabel || 'Project overview')}</p>
+              <p>${project.roleHtml || escapeHtml(project.role)}</p>
             </div>
           </div>
 

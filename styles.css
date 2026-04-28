@@ -266,7 +266,12 @@ button:focus-visible {
   grid-template-columns: 1fr;
 }
 
+.media-gallery-heading {
+  margin-bottom: 20px;
+}
+
 .section-heading h2,
+.media-gallery-heading h2,
 .hero-stage h1,
 .project-page h1,
 .project-page h2,
@@ -290,6 +295,11 @@ button:focus-visible {
 .project-page h2 {
   font-size: clamp(2rem, 4vw, 3.3rem);
   max-width: 16ch;
+}
+
+.media-gallery-heading h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  max-width: none;
 }
 
 .section-heading-tight h2 {
