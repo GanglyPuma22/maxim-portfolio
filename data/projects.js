@@ -575,10 +575,10 @@ export const projects = [
   {
     slug: 'cuarenta',
     title: 'Cuarenta',
-    eyebrow: 'Featured · realtime game product · private / unreleased',
+    eyebrow: 'Featured · realtime game product · public release',
     tier: 'featured',
-    status: 'Polished private prototype',
-    visibility: 'Private / unreleased',
+    status: 'Public release v0.2.0',
+    visibility: 'Public repo and live game',
     domain: 'Realtime UI / game systems / product polish',
     cardDomain: 'Realtime UI / game systems',
     summary:
@@ -601,13 +601,13 @@ export const projects = [
       'Kept the rules and scoring reference inside the app because sending people to a separate tab mid-hand is miserable.',
     ],
     outcomes: [
-      'The current prototype is much easier to read and recover inside than the older version.',
+      'The public release is much easier to read and recover inside than the older version.',
       'Recent passes tightened drag-hover behavior, preview badges, and board-card accessibility.',
-      'I still would not call it ready for a truly open public audience because the backend is not server-authoritative yet.',
+      'The current backend trust-model limits are documented plainly instead of being hidden behind vague release language.',
     ],
     proofPoints: [
-      'README covers the gameplay surface, reconnect flow, and the remaining public-release blockers with unusual honesty.',
-      'The repo already documents anonymous-auth assumptions and the limits of the current trust model.',
+      'README covers the gameplay surface, reconnect flow, and the current trust-model limits plainly.',
+      'The repo documents anonymous-auth assumptions and where the backend still is not server-authoritative.',
       'It is a lighter project than the infrastructure work, but it still carries real state, realtime behavior, and UX complexity.',
     ],
     detailSections: [
@@ -624,9 +624,10 @@ export const projects = [
     sourceNotes: ['Cuarenta/README.md', 'Cuarenta/docs/release-draft.md'],
     stack: ['React 19', 'Vite', 'Firebase RTDB', 'drag interactions'],
     privacyNote:
-      'Stays private and unreleased for now because the current backend model is still being tightened.',
+      'Public repo and live game. The current backend assumptions and trust-model limits are documented openly.',
     links: [
       { label: 'GitHub', url: 'https://github.com/GanglyPuma22/Cuarenta' },
+      { label: 'Release v0.2.0', url: 'https://github.com/GanglyPuma22/Cuarenta/releases/tag/v0.2.0' },
       { label: 'Live game', url: 'https://cuarenta-dfbf1.web.app/' },
     ],
     media: {
