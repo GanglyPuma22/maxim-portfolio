@@ -164,13 +164,13 @@ const renderMediaGallery = (items = []) => {
                         (step, index) => `
                           <div class="gallery-sequence-step">
                             <img
-                              src="${escapeHtml(step.src)}"
+                              src="${escapeHtml(assetUrl(step.src))}"
                               alt="${escapeHtml(step.alt || 'Sequence image')}"
                               loading="lazy"
                               decoding="async"
                               fetchpriority="low"
                               data-expandable="true"
-                              data-full-src="${escapeHtml(step.src)}"
+                              data-full-src="${escapeHtml(assetUrl(step.src))}"
                               data-alt="${escapeHtml(step.alt || 'Sequence image')}"
                               data-caption="${escapeHtml(step.caption || '')}"
                             />

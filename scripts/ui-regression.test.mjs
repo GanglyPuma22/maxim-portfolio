@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [projects, styles, indexHtml, server] = await Promise.all([
+const [app, projects, styles, indexHtml, server] = await Promise.all([
+  readFile(new URL('../app.js', import.meta.url), 'utf8'),
   readFile(new URL('../data/projects.js', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
@@ -61,4 +62,9 @@ test('local dev server strips the repo base path before resolving files', () => 
   assert.match(server, /const BASE_PATH = '\/maxim-portfolio';/);
   assert.match(server, /normalizedPath === BASE_PATH/);
   assert.match(server, /normalizedPath\.startsWith\(`\$\{BASE_PATH\}\/`\)/);
+});
+
+test('sequence gallery media uses the GitHub Pages base path', () => {
+  assert.match(app, /src="\$\{escapeHtml\(assetUrl\(step\.src\)\)\}"/);
+  assert.match(app, /data-full-src="\$\{escapeHtml\(assetUrl\(step\.src\)\)\}"/);
 });
